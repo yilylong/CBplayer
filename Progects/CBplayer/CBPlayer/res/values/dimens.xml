@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="percent_text_size_default">16sp</dimen>
+    <dimen name="stroke_width_default">5sp</dimen>
+    <dimen name="rect_round_default">5sp</dimen>
+    <!-- VideoView 界面用到 -->
+    <dimen name="control_rl_padding">20dp</dimen>
+    <dimen name="control_rl_padding_bottom">10dp</dimen>
+    <dimen name="control_showresult_rl_w">200dp</dimen>
+    <dimen name="control_showresult_rl_h">160dp</dimen>
+    <dimen name="control_show_pb_height">5dp</dimen>
+    <dimen name="play_control_rl_h">50dp</dimen>
+    <dimen name="play_control_pb_h">12dp</dimen>
+    <dimen name="play_control_videoinfo_textsize">16sp</dimen>
+    
+    <dimen name="cbprogressbar_rect_rount">2dp</dimen>
+   
+</resources>

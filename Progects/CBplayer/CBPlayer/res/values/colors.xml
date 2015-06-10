@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_white">#FFFFFF</color>
+    <color name="percent_text_color_default">#2196F3</color>
+    <color name="progressbar_bg_color_default">#00BCD4</color>
+    <color name="progress_color_default">#00BCD4</color>
+    
+    <color name="video_view_control_show_bg">#55212121</color>
+    <color name="video_play_videoinfo_textcolor">#FFFFFF</color>
+    
+    <color name="cbprogressbar_bgcolor">#BBDEFB</color>
+    <color name="cbprogressbar_progresscolor">#00BCD4</color>
+    
+</resources>

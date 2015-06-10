@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item type="id" name="video_view"/>
+    <item type="id" name="icon_control_show"/>
+    <item type="id" name="cbprogressbar_control_show"/>
+    <item type="id" name="paly_control_ll"/>
+    <item type="id" name="play_btn"/>
+    <item type="id" name="play_progressbar"/>
+    <item type="id" name="video_info"/>
+</resources>

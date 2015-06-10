@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CBplayer</string>
+
+    <!-- menuitem begin -->
+    <string name="item_name_online">在线</string>
+    <string name="item_name_local">本地</string>
+    <string name="item_name_user">用户</string>
+    <string name="item_name_settings">设置</string>
+    <!-- menuitem end -->
+
+</resources>

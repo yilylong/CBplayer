@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <io.vov.vitamio.widget.VideoView
+        android:id="@id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/bg_novideo_default"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_videoview_default" />
+
+    <RelativeLayout
+        android:id="@+id/control_RLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/control_rl_padding_bottom"
+        android:paddingLeft="@dimen/control_rl_padding"
+        android:paddingRight="@dimen/control_rl_padding"
+        android:visibility="invisible" >
+
+        <!-- 播放的视频信息 -->
+
+        <TextView
+            android:id="@id/video_info"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="苍老师退役了.avi"
+            android:textColor="@color/video_play_videoinfo_textcolor"
+            android:textSize="@dimen/play_control_videoinfo_textsize" />
+
+        <!-- 中间的操作显示结果 -->
+
+        <RelativeLayout
+            android:id="@+id/control_showresult_rl"
+            android:layout_width="@dimen/control_showresult_rl_w"
+            android:layout_height="@dimen/control_showresult_rl_h"
+            android:layout_centerInParent="true"
+            android:background="@drawable/vieoplay_control_show_drawable"
+            android:padding="@dimen/control_rl_padding"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@id/icon_control_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_volume" />
+
+            <com.chongbao.cbplayer.view.CBProgressBar
+                android:id="@id/cbprogressbar_control_show"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                zhl:isHorizonStroke="true"
+                zhl:percent_text_color="@color/color_white"
+                zhl:progressBarBgColor="@color/cbprogressbar_bgcolor"
+                zhl:progressColor="@color/cbprogressbar_progresscolor"
+                zhl:rect_round="@dimen/cbprogressbar_rect_rount"
+                zhl:showPercentSign="false"
+                zhl:stroke_width="1dp" />
+        </RelativeLayout>
+
+        <!-- 播放控制 -->
+
+        <LinearLayout
+            android:id="@id/paly_control_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/play_control_rl_h"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@id/play_btn"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_btn_play" />
+
+            <SeekBar
+                android:id="@id/play_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:maxHeight="5dp"
+                android:minHeight="5dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/seekbar_progress_drawable"
+                android:thumb="@drawable/thumb_selector"
+                android:thumbOffset="0dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>
