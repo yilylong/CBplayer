@@ -9,5 +9,6 @@
     <string name="item_name_user">用户</string>
     <string name="item_name_settings">设置</string>
     <!-- menuitem end -->
+    <string name="msg_dialog_loading_local">正在加载本地媒体文件...</string>
 
 </resources>

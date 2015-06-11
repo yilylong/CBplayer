@@ -222,9 +222,11 @@ public class DialogBuilder {
 	public Dialog create() {
 		// 判断是否需要创建按钮
 		if (leftbtn == null) {
-			ViewGroup btnlayout = getView(R.id.dialog_btnlayout);
 			ViewGroup rootlayout = getView(R.id.dialog_root);
-			rootlayout.removeView(btnlayout);
+			ViewGroup btnlayout = getView(R.id.dialog_btnlayout);
+			if(btnlayout!=null){
+				rootlayout.removeView(btnlayout);
+			}
 		}
 		return dialog;
 	}

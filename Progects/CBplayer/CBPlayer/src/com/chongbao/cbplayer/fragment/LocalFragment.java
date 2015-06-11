@@ -2,8 +2,13 @@ package com.chongbao.cbplayer.fragment;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +20,7 @@ import android.widget.TextView;
 
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.bean.MediaBean;
+import com.chongbao.cbplayer.utils.DialogUtils;
 
 
 public class LocalFragment extends Fragment {
@@ -22,6 +28,9 @@ public class LocalFragment extends Fragment {
 	private static LocalFragment instance = new LocalFragment();
     private ListView mListView;
     private ArrayList<MediaBean> mediaList;
+    private Dialog progressDialog;
+    private LocalMediaAdapter mediaAdapter;
+    private int count;
     private LocalFragment(){
     }
     public static LocalFragment getInstance(){
@@ -32,9 +41,18 @@ public class LocalFragment extends Fragment {
     	View view = inflater.inflate(R.layout.fmlayout_local, container, false);
     	mListView = (ListView) view.findViewById(R.id.local_media_listview);
     	mediaList = new ArrayList<MediaBean>();
-    	mListView.setAdapter(new LocalMediaAdapter());
+    	mListView.setAdapter(mediaAdapter=new LocalMediaAdapter());
         return view;
     }
+    @Override
+    public void onResume() {
+    	if(count>=1){
+    		initData();
+    	}
+    	count++;
+    	super.onResume();
+    }
+    
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
     	initData();
@@ -47,33 +65,57 @@ public class LocalFragment extends Fragment {
 
     /**
      * 媒体文件扫描TASK
-     * @author huang-hua
+     * @author zhl
      *
      */
-    private class MediaScanerTask extends AsyncTask<Void, Void, Boolean>{
+    private class MediaScanerTask extends AsyncTask<Void, Void, ArrayList<MediaBean>>{
     	@Override
     	protected void onPreExecute() {
-    		
+    		showDialog();
     	}
 		@Override
-		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			return null;
+		protected ArrayList<MediaBean> doInBackground(Void... params) {
+			getMediaData();
+			return mediaList;
 		}
+		
 		@Override
-		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
+		protected void onPostExecute(ArrayList<MediaBean> result) {
+			dismissDialog();
+			mediaAdapter.notifyDataSetChanged();
 		}
     	
     }
+    
+    private void getMediaData() {
+    	mediaList.clear();
+    	try {
+    		ContentResolver ctResolver = getActivity().getContentResolver();
+    		Cursor cursor = ctResolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+    				new String[]{MediaStore.Video.Media.DISPLAY_NAME,MediaStore.Video.Media.DURATION,MediaStore.Video.Media.DATA},
+    				null, null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
+    				while(cursor.moveToNext()){
+    					MediaBean bean = new MediaBean();
+    					bean.name=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME));
+    					bean.duration=cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
+    					bean.url=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
+    					bean.type=1;
+    					mediaList.add(bean);
+    				}
+    		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+    
     
 	private class LocalMediaAdapter extends BaseAdapter{
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return mediaList==null?0:mediaList.size();
 		}
 
 		@Override
@@ -90,8 +132,19 @@ public class LocalFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			return null;
+			ViewHolder viewHolder = null;
+			if(convertView==null){
+				viewHolder = new ViewHolder();
+				convertView = LayoutInflater.from(LocalFragment.this.getActivity()).inflate(R.layout.item_local_medialist, parent, false);
+				viewHolder.icon = (ImageView) convertView.findViewById(R.id.item_video_icon);
+				viewHolder.info = (TextView) convertView.findViewById(R.id.item_video_info);
+				convertView.setTag(viewHolder);
+			}else{
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+			MediaBean bean = mediaList.get(position);
+			viewHolder.info.setText(bean.name);
+			return convertView;
 		}
     	
     }
@@ -100,4 +153,16 @@ public class LocalFragment extends Fragment {
     	TextView info;
     }
     
+    private void showDialog(){
+    	if(progressDialog==null){
+    		progressDialog = DialogUtils.showProgressDialog(getActivity(), getString(R.string.msg_dialog_loading_local));
+    	}
+    	progressDialog.show();
+    }
+    @SuppressLint("NewApi")
+	private void dismissDialog(){
+    	if(progressDialog!=null&&!getActivity().isDestroyed()){
+    		progressDialog.dismiss();
+    	}
+    }
 }

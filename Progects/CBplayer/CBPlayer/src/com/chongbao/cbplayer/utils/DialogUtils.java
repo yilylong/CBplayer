@@ -32,7 +32,7 @@ public class DialogUtils {
 			layoutStyle = DialogBuilder.DIALOG_STYLE_NOR;
 		}
 		return new DialogBuilder(context, 0, layoutStyle)
-		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_BOTTOM)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setTitle(title)
 		.setMessage(msg)
@@ -51,7 +51,7 @@ public class DialogUtils {
 			layoutStyle = DialogBuilder.DIALOG_STYLE_NOR;
 		}
 		return new DialogBuilder(context, 0, layoutStyle,true)
-		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_BOTTOM)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setTitle(title)
 		.setMessage(msg)
@@ -68,7 +68,7 @@ public class DialogUtils {
 	 */
 	public static Dialog showSingleBtnDialog(Context context,String title,String msg){
 		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_BLUE)
-		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_BOTTOM)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setTitle(title)
 		.setMessage(msg)
@@ -85,7 +85,7 @@ public class DialogUtils {
 	 */
 	public static Dialog showSingleBtnDialog(Context context,String title,String msg,boolean isSytemAlert){
 		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_BLUE,isSytemAlert)
-		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_BOTTOM)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setTitle(title)
 		.setMessage(msg)
@@ -102,7 +102,7 @@ public class DialogUtils {
 //		View view = LayoutInflater.from(context).inflate(resource, null);
 		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_LOADING_TRANSPARENT)
 		.setView(R.layout.waitting_layout)
-		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_BOTTOM)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setMessage(msg)
 		.create();
@@ -116,7 +116,7 @@ public class DialogUtils {
 	public static Dialog showProgressDialog(Context context,String msg,int resLayout){
 		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_LOADING_TRANSPARENT)
 		.setView(resLayout)
-		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_BOTTOM)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setMessage(msg)
 		.create();
