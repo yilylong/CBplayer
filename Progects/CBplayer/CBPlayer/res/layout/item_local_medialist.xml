@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:textColor="#727272"
+        android:textColor="@color/tip_textcolor"
         android:singleLine="true"
         android:ellipsize="marquee"
         android:text="这不是个视频" />

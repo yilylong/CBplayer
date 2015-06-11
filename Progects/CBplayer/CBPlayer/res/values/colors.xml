@@ -20,4 +20,10 @@
     <color name="bg_dialog_normal">#EFEFEF</color>
     <color name="bg_item_press">#459EDA</color>
     <color name="bg_item_normal">#EFEFEF</color>
+    
+    
+    
+    <color name="tip_textcolor">#727272</color>
+    
+    
 </resources>

@@ -16,12 +16,7 @@ import android.widget.TextView;
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.bean.MediaBean;
 
-/**
- * User: special
- * Date: 13-12-22
- * Time: 下午1:31
- * Mail: specialcyci@gmail.com
- */
+
 public class LocalFragment extends Fragment {
 	public static final String TAG = "LocalFragment";
 	private static LocalFragment instance = new LocalFragment();
@@ -47,7 +42,7 @@ public class LocalFragment extends Fragment {
     }
     
     private void initData() {
-		
+		new MediaScanerTask().execute();
 	}
 
     /**
@@ -58,8 +53,7 @@ public class LocalFragment extends Fragment {
     private class MediaScanerTask extends AsyncTask<Void, Void, Boolean>{
     	@Override
     	protected void onPreExecute() {
-    		// TODO Auto-generated method stub
-    		super.onPreExecute();
+    		
     	}
 		@Override
 		protected Boolean doInBackground(Void... params) {
