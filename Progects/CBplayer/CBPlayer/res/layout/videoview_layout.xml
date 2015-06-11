@@ -46,22 +46,24 @@
             android:layout_centerInParent="true"
             android:background="@drawable/vieoplay_control_show_drawable"
             android:padding="@dimen/control_rl_padding"
-            android:visibility="gone" >
+            android:visibility="invisible" >
 
             <ImageView
                 android:id="@id/icon_control_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/icon_volume" />
+                android:src="@drawable/icon_volume" />
 
             <com.chongbao.cbplayer.view.CBProgressBar
+                android:visibility="invisible"
                 android:id="@id/cbprogressbar_control_show"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
+                android:focusable="false"
                 zhl:isHorizonStroke="true"
                 zhl:percent_text_color="@color/color_white"
                 zhl:progressBarBgColor="@color/cbprogressbar_bgcolor"
