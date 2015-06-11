@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            style="@style/fragment_text"
-            android:layout_gravity="center"
-            android:id="@+id/textView"/>
+    <ListView
+        android:id="@+id/local_media_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@color/color_transparent"
+        android:divider="@color/item_divider_color"
+        android:dividerHeight="0.5dp"
+        android:fadingEdge="none"
+        android:fadeScrollbars="true"
+        android:scrollbars="none" />
 
 </FrameLayout>

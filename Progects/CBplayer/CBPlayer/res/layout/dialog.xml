@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <!-- 对话框标题 和图标 -->
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@drawable/button_blue_press"
+        android:text="提示"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <!-- 对话框消息内容 -->
+
+    <LinearLayout
+        android:id="@+id/dialog_msg_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#EFEFEF"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/dialog_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:maxLines="4"
+            android:padding="10dp"
+            android:textColor="#000001"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <!-- 对话框确定/取消按钮 -->
+
+    <LinearLayout
+        android:id="@+id/dialog_btnlayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#EFEFEF"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <!-- 分割线 -->
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0.3dp"
+            android:background="@drawable/button_blue_press" />
+
+        <!-- 对话框确定/取消按钮 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/dialog_posi_btn"
+                android:layout_width="0dp"
+                android:layout_height="49.5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dialog_btn"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#000001"
+                android:textSize="15sp" />
+
+            <!-- 中间分割线 -->
+
+            <ImageView
+                android:layout_width="0.3dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/button_blue_press" />
+
+            <TextView
+                android:id="@+id/dialog_neg_btn"
+                android:layout_width="0dp"
+                android:layout_height="49.5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dialog_btn"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#000001"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
