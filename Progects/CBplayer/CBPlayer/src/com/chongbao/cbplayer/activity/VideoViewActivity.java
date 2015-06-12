@@ -1,5 +1,6 @@
 package com.chongbao.cbplayer.activity;
 
+import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
 import android.app.Activity;
 import android.content.Context;
@@ -7,12 +8,9 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,6 +18,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.chongbao.cbplayer.R;
+import com.chongbao.cbplayer.bean.MediaBean;
+import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.BrightnessUtil;
 import com.chongbao.cbplayer.utils.MeasureUtil;
 import com.chongbao.cbplayer.view.CBProgressBar;
@@ -51,6 +51,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	private int mScreenW,mScreenH;
 	private int mTouchSlop;
 	private AudioManager mAudioManager;
+	private MediaBean video;
 	
 	/**定时隐藏控制层**/
 	private Handler mDismissHander = new Handler(){
@@ -76,10 +77,10 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.videoview_layout);
 		initView();
-		initVideo();
 		showControlFrame();
 		initScreenWidthAndHeight();
 		mTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
+		initVideo();
 	}
 
 
@@ -102,7 +103,16 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	}
 	
 	private void initVideo() {
-		
+		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
+		if(video!=null){
+			mVideoView.setVideoPath(video.url);
+			mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+				@Override
+				public void onPrepared(MediaPlayer mp) {
+					mp.setPlaybackSpeed(1.0f);
+				}
+			});
+		}
 	}
 	
 	@Override

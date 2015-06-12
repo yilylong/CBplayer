@@ -1,6 +1,12 @@
 package com.chongbao.cbplayer.bean;
 
-public class MediaBean {
+import java.io.Serializable;
+
+public class MediaBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String name;
 	public int type;//1 ，视频0 ，音频
 	public long duration;// 时常

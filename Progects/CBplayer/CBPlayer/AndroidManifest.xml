@@ -24,6 +24,7 @@
         <activity
             android:name=".activity.VideoViewActivity"
             android:launchMode="singleTask"
+            android:process=":vitamio"
             android:screenOrientation="landscape" />
     </application>
 

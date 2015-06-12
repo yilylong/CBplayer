@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,17 +14,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chongbao.cbplayer.R;
+import com.chongbao.cbplayer.activity.VideoViewActivity;
 import com.chongbao.cbplayer.bean.MediaBean;
+import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.DialogUtils;
 
 
-public class LocalFragment extends Fragment {
+public class LocalFragment extends Fragment implements OnItemClickListener{
 	public static final String TAG = "LocalFragment";
 	private static LocalFragment instance = new LocalFragment();
     private ListView mListView;
@@ -42,6 +47,7 @@ public class LocalFragment extends Fragment {
     	mListView = (ListView) view.findViewById(R.id.local_media_listview);
     	mediaList = new ArrayList<MediaBean>();
     	mListView.setAdapter(mediaAdapter=new LocalMediaAdapter());
+    	mListView.setOnItemClickListener(this);
         return view;
     }
     @Override
@@ -55,8 +61,8 @@ public class LocalFragment extends Fragment {
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-    	initData();
     	super.onActivityCreated(savedInstanceState);
+    	initData();
     }
     
     private void initData() {
@@ -165,4 +171,13 @@ public class LocalFragment extends Fragment {
     		progressDialog.dismiss();
     	}
     }
+    
+    
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Intent i = new Intent(this.getActivity(),VideoViewActivity.class);
+		i.putExtra(Constans.PARAM_VIDEO, mediaList.get(position));
+		startActivity(i);
+	}
 }
