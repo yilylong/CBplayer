@@ -67,7 +67,7 @@
                 zhl:isHorizonStroke="true"
                 zhl:percent_text_color="@color/color_white"
                 zhl:progressBarBgColor="@color/cbprogressbar_bgcolor"
-                zhl:progressColor="@color/cbprogressbar_progresscolor"
+                zhl:progress_color="@color/cbprogressbar_progresscolor"
                 zhl:rect_round="@dimen/cbprogressbar_rect_rount"
                 zhl:showPercentSign="false"
                 zhl:stroke_width="1dp" />

@@ -8,7 +8,7 @@
         <!-- 进度条背景颜色 -->
         <attr name="progressBarBgColor" format="reference|color|integer"/>
           <!-- 进度颜色 -->
-        <attr name="progressColor" format="reference|color|integer"/> 
+        <attr name="progress_color" format="reference|color|integer"/> 
          <!-- 圆形进度条边框大小 -->
         <attr name="stroke_width" format="integer|dimension"/> 
          <!-- 矩形进度条 四周圆角大小 -->

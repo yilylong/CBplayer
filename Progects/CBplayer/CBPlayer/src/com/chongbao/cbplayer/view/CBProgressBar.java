@@ -63,7 +63,7 @@ public class CBProgressBar extends CBbaseView {
 		TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.cbprogressbar);
 		percenttextcolor = array.getColor(R.styleable.cbprogressbar_percent_text_color, getResources().getColor(R.color.percent_text_color_default));
 		progressBarBgColor = array.getColor(R.styleable.cbprogressbar_progressBarBgColor, getResources().getColor(R.color.progressbar_bg_color_default));
-		progressColor = array.getColor(R.styleable.cbprogressbar_progressColor, getResources().getColor(R.color.progress_color_default));
+		progressColor = array.getColor(R.styleable.cbprogressbar_progress_color, getResources().getColor(R.color.progress_color_default));
 		percenttextsize = (int) array.getDimension(R.styleable.cbprogressbar_percent_text_size, getResources().getDimension(R.dimen.percent_text_size_default));
 		strokeWidth = (int) array.getDimension(R.styleable.cbprogressbar_stroke_width, getResources().getDimension(R.dimen.stroke_width_default));
 		rectRound = (int) array.getDimension(R.styleable.cbprogressbar_rect_round, getResources().getDimension(R.dimen.rect_round_default));
