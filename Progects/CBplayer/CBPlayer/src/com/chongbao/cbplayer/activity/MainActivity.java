@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.chongbao.cbplayer.R;
+import com.chongbao.cbplayer.fragment.TVFragment;
 import com.chongbao.cbplayer.fragment.UserFragment;
 import com.chongbao.cbplayer.fragment.HomeFragment;
 import com.chongbao.cbplayer.fragment.LocalFragment;
@@ -90,6 +91,9 @@ public class MainActivity extends BaseResideMenuActivity {
 				changeFragment(HomeFragment.getInstance(),HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
 				break;
 			case 1:
+				changeFragment(TVFragment.getInstance(),TVFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				break;
+			case 2:
 				changeFragment(LocalFragment.getInstance(),LocalFragment.TAG,ResideMenu.DIRECTION_LEFT);
 				break;
 

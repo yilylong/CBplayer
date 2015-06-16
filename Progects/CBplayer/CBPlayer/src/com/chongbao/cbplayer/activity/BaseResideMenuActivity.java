@@ -17,6 +17,7 @@ public abstract class BaseResideMenuActivity extends FragmentActivity implements
 	protected ResideMenuItem itemLocal;
 	protected ResideMenuItem itemUser;
 	protected ResideMenuItem itemSettings;
+	protected ResideMenuItem itemTV;
 	protected FragmentManager fm;
 	private String CurFragmentTag;
 	@Override
@@ -30,7 +31,7 @@ public abstract class BaseResideMenuActivity extends FragmentActivity implements
 	
 	private void initResideMenu() {
 		resideMenu = new ResideMenu(this);
-		resideMenu.setBackground(R.drawable.menu_background);
+		resideMenu.setBackground(R.drawable.reside_menu_bg);
 		resideMenu.attachToActivity(this);
 		resideMenu.setMenuListener(this);
 		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
@@ -40,14 +41,17 @@ public abstract class BaseResideMenuActivity extends FragmentActivity implements
 		// create menu items;
 		itemOnline = new ResideMenuItem(this, R.drawable.icon_home,
 				getString(R.string.item_name_online));
-		itemLocal = new ResideMenuItem(this, R.drawable.icon_calendar,
+		itemLocal = new ResideMenuItem(this, R.drawable.icon_local,
 				getString(R.string.item_name_local));
 		itemUser = new ResideMenuItem(this, R.drawable.icon_profile,
 				getString(R.string.item_name_user));
 		itemSettings = new ResideMenuItem(this, R.drawable.icon_settings,
 				getString(R.string.item_name_settings));
+		itemTV = new ResideMenuItem(this, R.drawable.icon_tv,
+				getString(R.string.item_name_tv));
 
 		resideMenu.addMenuItem(itemOnline, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemTV, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemLocal, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemUser, ResideMenu.DIRECTION_RIGHT);
 		resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_RIGHT);
