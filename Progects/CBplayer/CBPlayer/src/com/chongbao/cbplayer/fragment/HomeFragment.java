@@ -23,12 +23,11 @@ public class HomeFragment extends Fragment {
 	public static final String TAG = "HomeFragment";
     private View parentView;
     private ResideMenu resideMenu;
-    private static HomeFragment instance = new HomeFragment();
     
     private HomeFragment(){
     }
     public static HomeFragment getInstance(){
-    	return instance;
+    	return new HomeFragment();
     }
     
     @Override

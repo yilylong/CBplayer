@@ -16,12 +16,10 @@ import com.chongbao.cbplayer.R;
  */
 public class SettingsFragment extends Fragment {
 	public static final String TAG = "SettingsFragment";
-	private static SettingsFragment instance = new SettingsFragment();
-    
     private SettingsFragment(){
     }
     public static SettingsFragment getInstance(){
-    	return instance;
+    	return new SettingsFragment();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

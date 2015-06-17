@@ -1,11 +1,13 @@
 package com.chongbao.cbplayer.activity;
 
+import io.vov.vitamio.LibsChecker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -29,6 +31,10 @@ public class MainActivity extends BaseResideMenuActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+//		if(!LibsChecker.checkVitamioLibs(this)){
+//			return;
+//		};
+		Log.i("VideoViewActivity", "onCreate");
 		setContentView(R.layout.main);
 		mContext = this;
 		initTopNavBar();
@@ -114,4 +120,6 @@ public class MainActivity extends BaseResideMenuActivity {
 			}
 		}
 	}
+	
+	
 }
