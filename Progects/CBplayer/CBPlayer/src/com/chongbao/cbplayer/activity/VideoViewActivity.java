@@ -9,6 +9,7 @@ import io.vov.vitamio.widget.VideoView;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.chongbao.cbplayer.R;
@@ -127,12 +129,31 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		mControlResultRLayout = (RelativeLayout) findViewById(R.id.control_showresult_rl);
 		mControlRLayout = (RelativeLayout) findViewById(R.id.control_RLayout);
 		mPlayBtn.setOnClickListener(this);
+		mProgressBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				seek(seekBar.getProgress());
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				if(fromUser){
+					seek(progress);
+				}
+			}
+		});
 	}
 	
 	private void initVideo() {
 		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
 		if(video!=null){
-			mVideoView.setVideoPath(video.url);
+			videoInfo.setText(video.name);
+//			mVideoView.setVideoPath(video.url);
+			mVideoView.setVideoURI(Uri.parse("http://live.3gv.ifeng.com/zixun.m3u8"));
+			mVideoView.setBufferSize(1024*50);
 			mVideoView.setOnPreparedListener(new OnPreparedListener() {
 				@Override
 				public void onPrepared(MediaPlayer mp) {
@@ -197,6 +218,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			onTouch = true;
+			mProgressBar.requestFocus();
 			showControlFrame();
 			downX = (int) event.getX();
 			downY = (int) event.getY();
@@ -409,7 +431,12 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 			mVideoView = null;
 		}
 	}
-
+	
+	private void seek(long seekTo){
+		if(mVideoView!=null&&seekTo<mVideoView.getDuration()){
+			mVideoView.seekTo(seekTo);
+		}
+	}
 
 	
 }

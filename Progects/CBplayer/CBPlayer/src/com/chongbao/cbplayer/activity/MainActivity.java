@@ -130,13 +130,10 @@ public class MainActivity extends BaseResideMenuActivity {
 			}
 		}
 	}
-	
-
-
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putSerializable(Constans.PARAM_FRAGMENT, currentFragment);
+//		outState.putSerializable(Constans.PARAM_FRAGMENT, currentFragment);
 	}
 
 }
