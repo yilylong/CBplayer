@@ -23,7 +23,6 @@ public class UserFragment extends BaseFragment {
     private View parentView;
     private ListView listView;
     
-	   
     public static UserFragment getInstance(){
     	return new UserFragment();
     }

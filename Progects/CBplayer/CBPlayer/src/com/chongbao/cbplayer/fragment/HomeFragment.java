@@ -20,6 +20,7 @@ public class HomeFragment extends BaseFragment {
     private View parentView;
     private ResideMenu resideMenu;
    
+    
     public static HomeFragment getInstance(){
     	return new HomeFragment();
     }

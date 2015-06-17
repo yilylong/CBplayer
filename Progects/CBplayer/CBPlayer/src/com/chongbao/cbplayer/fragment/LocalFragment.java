@@ -3,6 +3,7 @@ package com.chongbao.cbplayer.fragment;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -65,11 +66,13 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
     	initData();
     	super.onActivityCreated(savedInstanceState);
     }
     
     private void initData() {
+    	showDialog();
 		new MediaScanerTask().execute();
 	}
 
@@ -81,7 +84,7 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
     private class MediaScanerTask extends AsyncTask<Void, Void, ArrayList<MediaBean>>{
     	@Override
     	protected void onPreExecute() {
-    		showDialog();
+//    		showDialog();
     	}
 		@Override
 		protected ArrayList<MediaBean> doInBackground(Void... params) {

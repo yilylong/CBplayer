@@ -131,35 +131,12 @@ public class MainActivity extends BaseResideMenuActivity {
 		}
 	}
 	
-	@Override
-	protected void onRestart() {
-		Log.i("VideoViewActivity", "onRestart");
-		super.onRestart();
-	}
-	@Override
-	protected void onResume() {
-		Log.i("VideoViewActivity", "onResume");
-		super.onResume();
-	}
-	
-	@Override
-	protected void onStart() {
-		Log.i("VideoViewActivity", "onStart");
-		super.onStart();
-	}
-	@Override
-	protected void onStop() {
-		Log.i("VideoViewActivity", "onStop");
-		super.onStop();
-	}
-	@Override
-	protected void onDestroy() {
-		Log.i("VideoViewActivity", "onDestroy");
-		super.onDestroy();
-	}
+
+
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putSerializable(Constans.PARAM_FRAGMENT, currentFragment);
 	}
-	
+
 }

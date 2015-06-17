@@ -15,8 +15,9 @@ public class SettingsFragment extends BaseFragment  {
 	private static final long serialVersionUID = 1L;
 	public static final String TAG = "SettingsFragment";
 	   
+
     public static SettingsFragment getInstance(){
-    	return  new SettingsFragment();
+    	return new SettingsFragment();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

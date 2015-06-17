@@ -85,6 +85,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				if(mVideoView!=null&&mVideoView.isPlaying()){
 					setSeekBar();
 					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
+
 				}else if(mVideoView!=null&&!mVideoView.isPlaying()){
 					setSeekBar();
 				}
@@ -142,6 +143,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 					mPlayBtn.setImageResource(R.drawable.icon_btn_pause);
 					// 开始更新进度
 					startUpdateProgress();
+
 				}
 
 			});
@@ -185,10 +187,11 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		}
 		
 	}
+
 	private void startUpdateProgress(){
 		mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE, PROGRESS_UPDATE_MILLIS);
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -385,6 +388,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 			}
 			mVideoView.start();
 			startUpdateProgress();
+			mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
 			mPlayBtn.setImageResource(R.drawable.icon_btn_pause);
 		}
 	}
@@ -392,7 +396,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	
 	@Override
 	protected void onDestroy() {
-//		releaseVideoView();
+		releaseVideoView();
 		super.onDestroy();
 	}
 
