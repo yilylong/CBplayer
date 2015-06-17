@@ -16,12 +16,11 @@ import com.chongbao.cbplayer.R;
  */
 public class TVFragment extends Fragment {
 	public static final String TAG = "TVFragment";
-	private static TVFragment instance = new TVFragment();
     
     private TVFragment(){
     }
     public static TVFragment getInstance(){
-    	return instance;
+    	return new TVFragment();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

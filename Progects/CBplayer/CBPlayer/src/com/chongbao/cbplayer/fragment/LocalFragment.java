@@ -3,14 +3,17 @@ package com.chongbao.cbplayer.fragment;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +39,15 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     private Dialog progressDialog;
     private LocalMediaAdapter mediaAdapter;
     private int count;
+    private static Context mContext;
     private LocalFragment(){
     }
     public static LocalFragment getInstance(){
-    	return instance;
+    	return new LocalFragment();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	Log.i("fragment", "onCreateView");
     	View view = inflater.inflate(R.layout.fmlayout_local, container, false);
     	mListView = (ListView) view.findViewById(R.id.local_media_listview);
     	mediaList = new ArrayList<MediaBean>();
@@ -52,6 +57,7 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     }
     @Override
     public void onResume() {
+    	Log.i("fragment", "onResume");
     	if(count>=1){
     		initData();
     	}
@@ -61,11 +67,12 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+    	Log.i("fragment", "onActivityCreated");
     	super.onActivityCreated(savedInstanceState);
-    	initData();
     }
     
     private void initData() {
+    	showDialog();
 		new MediaScanerTask().execute();
 	}
 
@@ -77,7 +84,7 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     private class MediaScanerTask extends AsyncTask<Void, Void, ArrayList<MediaBean>>{
     	@Override
     	protected void onPreExecute() {
-    		showDialog();
+//    		showDialog();
     	}
 		@Override
 		protected ArrayList<MediaBean> doInBackground(Void... params) {
@@ -158,12 +165,14 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     	ImageView icon;
     	TextView info;
     }
-    
+    @SuppressLint("NewApi")
     private void showDialog(){
     	if(progressDialog==null){
     		progressDialog = DialogUtils.showProgressDialog(getActivity(), getString(R.string.msg_dialog_loading_local));
     	}
-    	progressDialog.show();
+    	if(!getActivity().isDestroyed()){
+    		progressDialog.show();
+    	}
     }
     @SuppressLint("NewApi")
 	private void dismissDialog(){
@@ -179,5 +188,45 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
 		Intent i = new Intent(this.getActivity(),VideoViewActivity.class);
 		i.putExtra(Constans.PARAM_VIDEO, mediaList.get(position));
 		startActivity(i);
+	}
+	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		Log.i("fragment", "onCreate");
+		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		Log.i("fragment", "onAttach=="+activity);
+		super.onAttach(activity);
+	}
+	
+	@Override
+	public void onStart() {
+		Log.i("fragment", "onStart");
+		initData();
+		super.onStart();
+	}
+	@Override
+	public void onPause() {
+		Log.i("fragment", "onPause");
+		super.onPause();
+	}
+	@Override
+	public void onStop() {
+		Log.i("fragment", "onStop");
+		super.onStop();
+	}
+	@Override
+	public void onDestroyView() {
+		Log.i("fragment", "onDestroyView");
+		super.onDestroyView();
+	}
+	@Override
+	public void onDestroy() {
+		Log.i("fragment", "onDestroy");
+		super.onDestroy();
 	}
 }

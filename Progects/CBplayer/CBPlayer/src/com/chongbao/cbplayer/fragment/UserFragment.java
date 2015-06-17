@@ -26,12 +26,10 @@ public class UserFragment extends Fragment {
     private ListView listView;
     
     
-    private static UserFragment instance = new UserFragment();
-    
     private UserFragment(){
     }
     public static UserFragment getInstance(){
-    	return instance;
+    	return new UserFragment();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

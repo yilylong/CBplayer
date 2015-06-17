@@ -1,6 +1,10 @@
 package com.chongbao.cbplayer.activity;
 
+import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
+import io.vov.vitamio.MediaPlayer.OnCompletionListener;
+import io.vov.vitamio.MediaPlayer.OnInfoListener;
+import io.vov.vitamio.MediaPlayer.OnPreparedListener;
 import io.vov.vitamio.widget.VideoView;
 import android.app.Activity;
 import android.content.Context;
@@ -28,7 +32,9 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	public static final String TAG ="VideoViewActivity";
 	public static final int MSG_DISIMISS = 0;
 	public static final int MSG_SHOW = 1;
+	public static final int MSG_PROGRESS_UPDATE = 2;
 	public static final long DELAY_MILLIS = 3000;
+	public static final long PROGRESS_UPDATE_MILLIS = 990;
 	/**视频信息**/
 	private TextView videoInfo;
 	/**播放/暂停按钮**/
@@ -72,9 +78,27 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		};
 	};
 	
+	private Handler mProgressHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case MSG_PROGRESS_UPDATE:
+				if(mVideoView!=null&&mVideoView.isPlaying()){
+					setSeekBar();
+					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
+				}
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (!LibsChecker.checkVitamioLibs(this))
+			return;
 		setContentView(R.layout.videoview_layout);
 		initView();
 		showControlFrame();
@@ -106,15 +130,53 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
 		if(video!=null){
 			mVideoView.setVideoPath(video.url);
-			mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+			mVideoView.setOnPreparedListener(new OnPreparedListener() {
 				@Override
 				public void onPrepared(MediaPlayer mp) {
+					setSeekBar();
+					dismissControlFrame();
+					mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, mVideoView.getVideoAspectRatio());
 					mp.setPlaybackSpeed(1.0f);
+					mPlayBtn.setImageResource(R.drawable.icon_btn_play);
+					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE, PROGRESS_UPDATE_MILLIS);
+				}
+
+			});
+			mVideoView.setOnInfoListener(new OnInfoListener() {
+				
+				@Override
+				public boolean onInfo(MediaPlayer mp, int what, int extra) {
+					switch (what) {
+					case MediaPlayer.MEDIA_INFO_NOT_SEEKABLE:
+						mProgressBar.setMax(1);
+						mProgressBar.setProgress(1);
+						mProgressBar.setEnabled(false);
+						break;
+
+					default:
+						break;
+					}
+					return false;
 				}
 			});
+			mVideoView.setOnCompletionListener(new OnCompletionListener() {
+				
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					showControlFrame();
+				}
+			});
+			
 		}
 	}
 	
+	private void setSeekBar() {
+		if(mProgressBar!=null){
+			mProgressBar.setMax((int)mVideoView.getDuration());
+			mProgressBar.setProgress((int)mVideoView.getCurrentPosition());
+		}
+		
+	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -300,14 +362,32 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	 */
 	private void palyVideo() {
 		if(mVideoView.isPlaying()){
+			mProgressHandler.removeMessages(MSG_PROGRESS_UPDATE);
 			mVideoView.pause();
 			mPlayBtn.setImageResource(R.drawable.icon_btn_play);
 		}else{
 			mVideoView.start();
+			mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
 			mPlayBtn.setImageResource(R.drawable.icon_btn_pause);
 		}
 	}
 	
+	
+	@Override
+	protected void onDestroy() {
+		releaseVideoView();
+		super.onDestroy();
+	}
+
+
+	private void releaseVideoView() {
+		if(mVideoView!=null){
+			if(mVideoView.isPlaying()){
+				mVideoView.stopPlayback();
+			}
+			mVideoView = null;
+		}
+	}
 
 
 	
