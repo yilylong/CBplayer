@@ -3,7 +3,6 @@ package com.chongbao.cbplayer.fragment;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +13,17 @@ import android.widget.Toast;
 
 import com.chongbao.cbplayer.R;
 
-/**
- * User: special
- * Date: 13-12-22
- * Time: 下午3:26
- * Mail: specialcyci@gmail.com
- */
-public class UserFragment extends Fragment {
+
+public class UserFragment extends BaseFragment {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String TAG = "UserFragment";
     private View parentView;
     private ListView listView;
     
-    
-    private UserFragment(){
-    }
+	   
     public static UserFragment getInstance(){
     	return new UserFragment();
     }

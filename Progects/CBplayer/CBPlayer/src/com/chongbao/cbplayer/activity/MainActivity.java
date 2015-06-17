@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.chongbao.cbplayer.R;
+import com.chongbao.cbplayer.constans.Constans;
+import com.chongbao.cbplayer.fragment.BaseFragment;
 import com.chongbao.cbplayer.fragment.TVFragment;
 import com.chongbao.cbplayer.fragment.UserFragment;
 import com.chongbao.cbplayer.fragment.HomeFragment;
@@ -24,6 +26,7 @@ import com.special.ResideMenu.ResideMenuItem;
 public class MainActivity extends BaseResideMenuActivity {
 
 	private MainActivity mContext;
+	private BaseFragment currentFragment;
 
 	/**
 	 * Called when the activity is first created.
@@ -31,15 +34,17 @@ public class MainActivity extends BaseResideMenuActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		if(!LibsChecker.checkVitamioLibs(this)){
-//			return;
-//		};
 		Log.i("VideoViewActivity", "onCreate");
 		setContentView(R.layout.main);
 		mContext = this;
 		initTopNavBar();
-		if (savedInstanceState == null)
-			changeFragment(HomeFragment.getInstance(),HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+		if(savedInstanceState!=null){
+			currentFragment = (BaseFragment) savedInstanceState.getSerializable(Constans.PARAM_FRAGMENT);
+			changeFragment(currentFragment,HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+		}else{
+			currentFragment = HomeFragment.getInstance();
+			changeFragment(currentFragment,HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+		}
 	}
 
 	private void initTopNavBar() {
@@ -94,13 +99,16 @@ public class MainActivity extends BaseResideMenuActivity {
 		if (direction == ResideMenu.DIRECTION_LEFT) {
 			switch (position) {
 			case 0:
-				changeFragment(HomeFragment.getInstance(),HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				currentFragment = HomeFragment.getInstance();
+				changeFragment(currentFragment,HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
 				break;
 			case 1:
-				changeFragment(TVFragment.getInstance(),TVFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				currentFragment = TVFragment.getInstance();
+				changeFragment(currentFragment,TVFragment.TAG,ResideMenu.DIRECTION_LEFT);
 				break;
 			case 2:
-				changeFragment(LocalFragment.getInstance(),LocalFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				currentFragment = LocalFragment.getInstance();
+				changeFragment(currentFragment,LocalFragment.TAG,ResideMenu.DIRECTION_LEFT);
 				break;
 
 			default:
@@ -109,10 +117,12 @@ public class MainActivity extends BaseResideMenuActivity {
 		} else {
 			switch (position) {
 			case 0:
-				changeFragment(UserFragment.getInstance(),UserFragment.TAG,ResideMenu.DIRECTION_RIGHT);
+				currentFragment = UserFragment.getInstance();
+				changeFragment(currentFragment,UserFragment.TAG,ResideMenu.DIRECTION_RIGHT);
 				break;
 			case 1:
-				changeFragment(SettingsFragment.getInstance(),SettingsFragment.TAG,ResideMenu.DIRECTION_RIGHT);
+				currentFragment = SettingsFragment.getInstance();
+				changeFragment(currentFragment,SettingsFragment.TAG,ResideMenu.DIRECTION_RIGHT);
 				break;
 
 			default:
@@ -121,5 +131,35 @@ public class MainActivity extends BaseResideMenuActivity {
 		}
 	}
 	
+	@Override
+	protected void onRestart() {
+		Log.i("VideoViewActivity", "onRestart");
+		super.onRestart();
+	}
+	@Override
+	protected void onResume() {
+		Log.i("VideoViewActivity", "onResume");
+		super.onResume();
+	}
+	
+	@Override
+	protected void onStart() {
+		Log.i("VideoViewActivity", "onStart");
+		super.onStart();
+	}
+	@Override
+	protected void onStop() {
+		Log.i("VideoViewActivity", "onStop");
+		super.onStop();
+	}
+	@Override
+	protected void onDestroy() {
+		Log.i("VideoViewActivity", "onDestroy");
+		super.onDestroy();
+	}
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putSerializable(Constans.PARAM_FRAGMENT, currentFragment);
+	}
 	
 }

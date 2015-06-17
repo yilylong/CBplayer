@@ -3,16 +3,13 @@ package com.chongbao.cbplayer.fragment;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,15 +28,17 @@ import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.DialogUtils;
 
 
-public class LocalFragment extends Fragment implements OnItemClickListener{
+public class LocalFragment extends BaseFragment implements OnItemClickListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String TAG = "LocalFragment";
     private ListView mListView;
     private ArrayList<MediaBean> mediaList;
     private Dialog progressDialog;
     private LocalMediaAdapter mediaAdapter;
     private int count;
-    private LocalFragment(){
-    }
     public static LocalFragment getInstance(){
     	return new LocalFragment();
     }
@@ -86,21 +85,25 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     	}
 		@Override
 		protected ArrayList<MediaBean> doInBackground(Void... params) {
-			getMediaData();
-			return mediaList;
+			return getMediaData();
 		}
 		
 		@Override
 		protected void onPostExecute(ArrayList<MediaBean> result) {
+			if(result!=null){
+				mediaList.clear();
+				mediaList.addAll(result);
+			}
 			dismissDialog();
 			mediaAdapter.notifyDataSetChanged();
 		}
     	
     }
     
-    private void getMediaData() {
-    	mediaList.clear();
+    private ArrayList<MediaBean> getMediaData() {
+    	ArrayList<MediaBean> temp = null;
     	try {
+    		temp = new ArrayList<MediaBean>(); 
     		ContentResolver ctResolver = getActivity().getContentResolver();
     		Cursor cursor = ctResolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
     				new String[]{MediaStore.Video.Media.DISPLAY_NAME,MediaStore.Video.Media.DURATION,MediaStore.Video.Media.DATA},
@@ -111,11 +114,14 @@ public class LocalFragment extends Fragment implements OnItemClickListener{
     					bean.duration=cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
     					bean.url=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
     					bean.type=1;
-    					mediaList.add(bean);
+    					temp.add(bean);
     				}
+    				
+    		return temp;
     		
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 	}

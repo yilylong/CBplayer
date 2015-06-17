@@ -58,7 +58,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	private int mTouchSlop;
 	private AudioManager mAudioManager;
 	private MediaBean video;
-	
+	private boolean isPlayFinished;
 	/**定时隐藏控制层**/
 	private Handler mDismissHander = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -85,6 +85,8 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				if(mVideoView!=null&&mVideoView.isPlaying()){
 					setSeekBar();
 					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
+				}else if(mVideoView!=null&&!mVideoView.isPlaying()){
+					setSeekBar();
 				}
 				break;
 
@@ -134,11 +136,12 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				@Override
 				public void onPrepared(MediaPlayer mp) {
 					setSeekBar();
-					dismissControlFrame();
+					setInvisibleDelay();
 					mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, mVideoView.getVideoAspectRatio());
 					mp.setPlaybackSpeed(1.0f);
-					mPlayBtn.setImageResource(R.drawable.icon_btn_play);
-					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE, PROGRESS_UPDATE_MILLIS);
+					mPlayBtn.setImageResource(R.drawable.icon_btn_pause);
+					// 开始更新进度
+					startUpdateProgress();
 				}
 
 			});
@@ -163,6 +166,10 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				
 				@Override
 				public void onCompletion(MediaPlayer mp) {
+					mp.stop();
+					mPlayBtn.setImageResource(R.drawable.icon_btn_play);
+					mProgressHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
+					isPlayFinished = true;
 					showControlFrame();
 				}
 			});
@@ -172,11 +179,16 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	
 	private void setSeekBar() {
 		if(mProgressBar!=null){
+			mProgressBar.setEnabled(true);
 			mProgressBar.setMax((int)mVideoView.getDuration());
 			mProgressBar.setProgress((int)mVideoView.getCurrentPosition());
 		}
 		
 	}
+	private void startUpdateProgress(){
+		mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE, PROGRESS_UPDATE_MILLIS);
+	}
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -361,13 +373,18 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	 * 播放视频
 	 */
 	private void palyVideo() {
+
 		if(mVideoView.isPlaying()){
 			mProgressHandler.removeMessages(MSG_PROGRESS_UPDATE);
 			mVideoView.pause();
 			mPlayBtn.setImageResource(R.drawable.icon_btn_play);
 		}else{
+			if(isPlayFinished){
+				isPlayFinished = false;
+				mVideoView.seekTo(0);
+			}
 			mVideoView.start();
-			mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
+			startUpdateProgress();
 			mPlayBtn.setImageResource(R.drawable.icon_btn_pause);
 		}
 	}
@@ -375,7 +392,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	
 	@Override
 	protected void onDestroy() {
-		releaseVideoView();
+//		releaseVideoView();
 		super.onDestroy();
 	}
 

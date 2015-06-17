@@ -1,8 +1,6 @@
 package com.chongbao.cbplayer.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +8,18 @@ import android.widget.FrameLayout;
 
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.activity.MainActivity;
-import com.chongbao.cbplayer.activity.VideoViewActivity;
 import com.special.ResideMenu.ResideMenu;
 
-/**
- * User: special
- * Date: 13-12-22
- * Time: 下午1:33
- * Mail: specialcyci@gmail.com
- */
-public class HomeFragment extends Fragment {
+
+public class HomeFragment extends BaseFragment {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String TAG = "HomeFragment";
     private View parentView;
     private ResideMenu resideMenu;
-    
-    private HomeFragment(){
-    }
+   
     public static HomeFragment getInstance(){
     	return new HomeFragment();
     }
@@ -54,5 +48,6 @@ public class HomeFragment extends Fragment {
         FrameLayout ignored_view = (FrameLayout) parentView.findViewById(R.id.ignored_view);
         resideMenu.addIgnoredView(ignored_view);
     }
+
 
 }
