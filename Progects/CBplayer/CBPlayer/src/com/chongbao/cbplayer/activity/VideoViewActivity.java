@@ -1,5 +1,7 @@
 package com.chongbao.cbplayer.activity;
 
+import java.util.Date;
+
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.MediaPlayer.OnCompletionListener;
@@ -36,9 +38,11 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	public static final int MSG_SHOW = 1;
 	public static final int MSG_PROGRESS_UPDATE = 2;
 	public static final long DELAY_MILLIS = 3000;
-	public static final long PROGRESS_UPDATE_MILLIS = 990;
+	public static final long PROGRESS_UPDATE_MILLIS = 490;
 	/**视频信息**/
 	private TextView videoInfo;
+	private TextView timeProgress;
+	private TextView timeTotal;
 	/**播放/暂停按钮**/
 	private ImageView mPlayBtn;
 	/**进度条**/
@@ -87,7 +91,6 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				if(mVideoView!=null&&mVideoView.isPlaying()){
 					setSeekBar();
 					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
-
 				}else if(mVideoView!=null&&!mVideoView.isPlaying()){
 					setSeekBar();
 				}
@@ -122,6 +125,8 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	private void initView() {
 		mVideoView = (VideoView) findViewById(R.id.video_view);
 		videoInfo = (TextView) findViewById(R.id.video_info);
+		timeProgress = (TextView) findViewById(R.id.time_progress);
+		timeTotal = (TextView) findViewById(R.id.time_total);
 		mPlayBtn = (ImageView) findViewById(R.id.play_btn);
 		mProgressBar = (SeekBar) findViewById(R.id.play_progressbar);
 		mCBProgressBar = (CBProgressBar) findViewById(R.id.cbprogressbar_control_show);
@@ -140,7 +145,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-				if(fromUser){
+				if(fromUser&&!video.isStream){
 					seek(progress);
 				}
 			}
@@ -210,11 +215,14 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		mProgressBar.setMax(1);
 		mProgressBar.setProgress(1);
 	}
+	
 	private void setSeekBar() {
 		if(mProgressBar!=null){
 			mProgressBar.setEnabled(true);
 			mProgressBar.setMax((int)mVideoView.getDuration());
 			mProgressBar.setProgress((int)mVideoView.getCurrentPosition());
+			timeProgress.setText(getTime(mVideoView.getCurrentPosition()));
+			timeTotal.setText(getTime(mVideoView.getDuration()));
 		}
 		
 	}
@@ -439,6 +447,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 			if(mVideoView.isPlaying()){
 				mVideoView.stopPlayback();
 			}
+			mProgressHandler.removeMessages(MSG_PROGRESS_UPDATE);
 			mVideoView = null;
 		}
 	}
@@ -449,5 +458,29 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	private String getTime(long millis){
+		long seceonds = millis/1000;
+		long min = 0;
+		if(seceonds>=60){
+			min = seceonds/60;
+		}
+		long h = 0;
+		if(min>=60){
+			h = min/60;
+		}
+		StringBuffer bur = new StringBuffer();
+		if(h>=1){
+			bur.append("0"+h+":");
+		}
+		if(min>=1&&min<10){
+			bur.append("0"+h+":");
+		}else if(min>=1&&min>=10){
+			bur.append(h+":");
+		}
+		if(min<1){
+			bur.append("00:"+seceonds);
+		}
+		return bur.toString();
+	}
 	
 }

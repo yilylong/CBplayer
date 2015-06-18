@@ -5,6 +5,7 @@
     <dimen name="rect_round_default">5sp</dimen>
     <!-- VideoView 界面用到 -->
     <dimen name="control_rl_padding">20dp</dimen>
+    <dimen name="control_play_padding">10dp</dimen>
     <dimen name="control_rl_padding_bottom">10dp</dimen>
     <dimen name="control_showresult_rl_w">200dp</dimen>
     <dimen name="control_showresult_rl_h">160dp</dimen>

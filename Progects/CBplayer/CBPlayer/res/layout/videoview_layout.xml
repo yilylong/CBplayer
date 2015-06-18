@@ -9,19 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- <FrameLayout
+    <!--
+         <FrameLayout
         android:id="@+id/bg_novideo_default"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_videoview_default" /> -->
+        android:background="@drawable/bg_videoview_default" />
+    -->
 
     <RelativeLayout
         android:id="@+id/control_RLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/control_rl_padding_bottom"
-        android:paddingLeft="@dimen/control_rl_padding"
-        android:paddingRight="@dimen/control_rl_padding"
         android:visibility="invisible" >
 
         <!-- 播放的视频信息 -->
@@ -30,10 +29,14 @@
             android:id="@id/video_info"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:background="@color/video_view_control_show_bg2"
             android:ellipsize="marquee"
             android:gravity="center_vertical"
+            android:paddingLeft="@dimen/control_rl_padding"
+            android:paddingRight="@dimen/control_rl_padding"
             android:singleLine="true"
             android:text="苍老师退役了.avi"
+            android:typeface="serif"
             android:textColor="@color/video_play_videoinfo_textcolor"
             android:textSize="@dimen/play_control_videoinfo_textsize" />
 
@@ -56,7 +59,6 @@
                 android:src="@drawable/icon_volume" />
 
             <com.chongbao.cbplayer.view.CBProgressBar
-                android:visibility="invisible"
                 android:id="@id/cbprogressbar_control_show"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -64,6 +66,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:focusable="false"
+                android:visibility="invisible"
                 zhl:isHorizonStroke="true"
                 zhl:percent_text_color="@color/color_white"
                 zhl:progressBarBgColor="@color/cbprogressbar_bgcolor"
@@ -80,29 +83,51 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/play_control_rl_h"
             android:layout_alignParentBottom="true"
+            android:background="@color/video_view_control_show_bg2"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/control_play_padding"
+            android:paddingRight="@dimen/control_play_padding" >
 
             <ImageView
                 android:id="@id/play_btn"
                 android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:src="@drawable/icon_btn_play" />
+
+            <TextView
+                android:id="@+id/time_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textColor="@color/video_play_videoinfo_textcolor"
+                android:text="00:00" />
 
             <SeekBar
                 android:id="@id/play_progressbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:max="100"
                 android:maxHeight="5dp"
                 android:minHeight="5dp"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
                 android:progress="0"
                 android:progressDrawable="@drawable/seekbar_progress_drawable"
                 android:thumb="@drawable/thumb_selector"
                 android:thumbOffset="0dp" />
+
+            <TextView
+                android:id="@+id/time_total"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/video_play_videoinfo_textcolor"
+                android:gravity="center"
+                android:text="34:00" />
         </LinearLayout>
     </RelativeLayout>
 

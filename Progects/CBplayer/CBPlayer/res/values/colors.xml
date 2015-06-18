@@ -8,6 +8,7 @@
     <color name="progress_color_default">#00BCD4</color>
     
     <color name="video_view_control_show_bg">#55212121</color>
+    <color name="video_view_control_show_bg2">#66212121</color>
     <color name="video_play_videoinfo_textcolor">#FFFFFF</color>
     
     <color name="cbprogressbar_bgcolor">#BBDEFB</color>
