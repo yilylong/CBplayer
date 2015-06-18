@@ -13,7 +13,7 @@ import android.view.View;
 
 public abstract class BaseResideMenuActivity extends FragmentActivity implements ResideMenu.OnMenuItemClickListener,ResideMenu.OnMenuListener {
 	protected ResideMenu resideMenu;
-	protected ResideMenuItem itemOnline;
+	protected ResideMenuItem itemHome;
 	protected ResideMenuItem itemLocal;
 	protected ResideMenuItem itemUser;
 	protected ResideMenuItem itemSettings;
@@ -39,8 +39,8 @@ public abstract class BaseResideMenuActivity extends FragmentActivity implements
 		resideMenu.setScaleValue(0.6f);
 
 		// create menu items;
-		itemOnline = new ResideMenuItem(this, R.drawable.icon_home,
-				getString(R.string.item_name_online));
+		itemHome = new ResideMenuItem(this, R.drawable.icon_home,
+				getString(R.string.item_name_home));
 		itemLocal = new ResideMenuItem(this, R.drawable.icon_local,
 				getString(R.string.item_name_local));
 		itemUser = new ResideMenuItem(this, R.drawable.icon_profile,
@@ -50,7 +50,7 @@ public abstract class BaseResideMenuActivity extends FragmentActivity implements
 		itemTV = new ResideMenuItem(this, R.drawable.icon_tv,
 				getString(R.string.item_name_tv));
 
-		resideMenu.addMenuItem(itemOnline, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemTV, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemLocal, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemUser, ResideMenu.DIRECTION_RIGHT);

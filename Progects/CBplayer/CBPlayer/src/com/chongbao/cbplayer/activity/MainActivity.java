@@ -1,32 +1,28 @@
 package com.chongbao.cbplayer.activity;
 
-import io.vov.vitamio.LibsChecker;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.fragment.BaseFragment;
-import com.chongbao.cbplayer.fragment.TVFragment;
-import com.chongbao.cbplayer.fragment.UserFragment;
 import com.chongbao.cbplayer.fragment.HomeFragment;
 import com.chongbao.cbplayer.fragment.LocalFragment;
 import com.chongbao.cbplayer.fragment.SettingsFragment;
+import com.chongbao.cbplayer.fragment.TVFragment;
+import com.chongbao.cbplayer.fragment.UserFragment;
 import com.special.ResideMenu.ResideMenu;
-import com.special.ResideMenu.ResideMenuItem;
 
 public class MainActivity extends BaseResideMenuActivity {
 
 	private MainActivity mContext;
 	private BaseFragment currentFragment;
+	private TextView mTopBarTitle;
 
 	/**
 	 * Called when the activity is first created.
@@ -40,10 +36,30 @@ public class MainActivity extends BaseResideMenuActivity {
 		initTopNavBar();
 		if(savedInstanceState!=null){
 			currentFragment = (BaseFragment) savedInstanceState.getSerializable(Constans.PARAM_FRAGMENT);
+			int topBarResid = 0;
+			String TAG = null;
+			if(currentFragment instanceof HomeFragment){
+				TAG = HomeFragment.TAG;
+				topBarResid = R.string.item_name_home;
+			}else if(currentFragment instanceof TVFragment){
+				TAG = TVFragment.TAG;
+				topBarResid = R.string.item_name_tv;
+			}else if(currentFragment instanceof LocalFragment){
+				TAG = LocalFragment.TAG;
+				topBarResid = R.string.item_name_local;
+			}else if(currentFragment instanceof UserFragment){
+				TAG = UserFragment.TAG;
+				topBarResid = R.string.item_name_user;
+			}else if(currentFragment instanceof SettingsFragment){
+				TAG = SettingsFragment.TAG;
+				topBarResid = R.string.item_name_settings;
+			}
 			changeFragment(currentFragment,HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+			setTopBarTitle(topBarResid);
 		}else{
 			currentFragment = HomeFragment.getInstance();
 			changeFragment(currentFragment,HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+			setTopBarTitle(R.string.item_name_home);
 		}
 	}
 
@@ -63,6 +79,7 @@ public class MainActivity extends BaseResideMenuActivity {
 						resideMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
 					}
 				});
+		mTopBarTitle = (TextView) findViewById(R.id.top_bar_title);
 	}
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -73,13 +90,12 @@ public class MainActivity extends BaseResideMenuActivity {
     	startActivity(i);
     };
 
-//	private void changeFragment(Fragment targetFragment) {
-//		resideMenu.clearIgnoredViewList();
-//		getSupportFragmentManager().beginTransaction()
-//				.replace(R.id.main_fragment, targetFragment, "fragment")
-//				.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//				.commit();
-//	}
+    
+    public void setTopBarTitle(int resid){
+    	if(mTopBarTitle!=null){
+    		mTopBarTitle.setText(resid);
+    	}
+    }
 
 
 	@Override
@@ -101,14 +117,17 @@ public class MainActivity extends BaseResideMenuActivity {
 			case 0:
 				currentFragment = HomeFragment.getInstance();
 				changeFragment(currentFragment,HomeFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				setTopBarTitle(R.string.item_name_home);
 				break;
 			case 1:
 				currentFragment = TVFragment.getInstance();
 				changeFragment(currentFragment,TVFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				setTopBarTitle(R.string.item_name_tv);
 				break;
 			case 2:
 				currentFragment = LocalFragment.getInstance();
 				changeFragment(currentFragment,LocalFragment.TAG,ResideMenu.DIRECTION_LEFT);
+				setTopBarTitle(R.string.item_name_local);
 				break;
 
 			default:
@@ -119,10 +138,12 @@ public class MainActivity extends BaseResideMenuActivity {
 			case 0:
 				currentFragment = UserFragment.getInstance();
 				changeFragment(currentFragment,UserFragment.TAG,ResideMenu.DIRECTION_RIGHT);
+				setTopBarTitle(R.string.item_name_user);
 				break;
 			case 1:
 				currentFragment = SettingsFragment.getInstance();
 				changeFragment(currentFragment,SettingsFragment.TAG,ResideMenu.DIRECTION_RIGHT);
+				setTopBarTitle(R.string.item_name_settings);
 				break;
 
 			default:
@@ -133,7 +154,7 @@ public class MainActivity extends BaseResideMenuActivity {
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-//		outState.putSerializable(Constans.PARAM_FRAGMENT, currentFragment);
+		outState.putParcelable(Constans.PARAM_FRAGMENT,(Parcelable) currentFragment);
 	}
 
 }

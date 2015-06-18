@@ -1,6 +1,9 @@
 package com.chongbao.cbplayer.fragment;
 
+import java.io.Serializable;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,7 @@ import com.chongbao.cbplayer.activity.MainActivity;
 import com.special.ResideMenu.ResideMenu;
 
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment  {
 	/**
 	 * 
 	 */

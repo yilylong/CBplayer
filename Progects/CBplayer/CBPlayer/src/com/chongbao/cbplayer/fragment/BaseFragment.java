@@ -18,7 +18,17 @@ import com.chongbao.cbplayer.activity.VideoViewActivity;
 import com.special.ResideMenu.ResideMenu;
 
 
-public class BaseFragment extends Fragment implements Serializable {
+public class BaseFragment extends Fragment implements Parcelable {
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+	}
 
 }

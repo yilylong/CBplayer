@@ -27,6 +27,7 @@
                 android:background="@drawable/titlebar_menu_selector" />
 
             <TextView
+                android:id="@+id/top_bar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

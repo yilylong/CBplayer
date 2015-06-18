@@ -4,7 +4,7 @@
     <string name="app_name">CBplayer</string>
 
     <!-- menuitem begin -->
-    <string name="item_name_online">在线</string>
+    <string name="item_name_home">主页</string>
     <string name="item_name_local">本地</string>
     <string name="item_name_user">用户</string>
     <string name="item_name_settings">设置</string>
