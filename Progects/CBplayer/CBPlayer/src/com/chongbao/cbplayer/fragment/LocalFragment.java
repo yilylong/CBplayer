@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Video.Thumbnails;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.chongbao.cbplayer.activity.VideoViewActivity;
 import com.chongbao.cbplayer.bean.MediaBean;
 import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.DialogUtils;
+import com.chongbao.cbplayer.utils.ImageUtil;
 
 
 public class LocalFragment extends BaseFragment implements OnItemClickListener{
@@ -116,7 +118,6 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
     					bean.title=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME));
     					bean.duration=cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
     					bean.url=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
-    					bean.thumb = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Thumbnails.DATA));
     					temp.add(bean);
     				}
     				
@@ -164,6 +165,8 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
 			}
 			MediaBean bean = mediaList.get(position);
 			viewHolder.info.setText(bean.title);
+			// TODO 这里取图片影响性能，后期用ImageUniverseral来加载
+			viewHolder.icon.setImageBitmap(ImageUtil.getVideoThumbnail(bean.url, 120, 100, Thumbnails.MICRO_KIND));
 			return convertView;
 		}
     	
