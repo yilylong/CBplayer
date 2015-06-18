@@ -150,10 +150,16 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	private void initVideo() {
 		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
 		if(video!=null){
-			videoInfo.setText(video.name);
-//			mVideoView.setVideoPath(video.url);
-			mVideoView.setVideoURI(Uri.parse("http://live.3gv.ifeng.com/zixun.m3u8"));
-			mVideoView.setBufferSize(1024*50);
+			videoInfo.setText(video.title);
+			if(video.isStream){
+				mVideoView.setVideoURI(Uri.parse("http://live.3gv.ifeng.com/zixun.m3u8"));
+				mVideoView.setBufferSize(1024*50);
+			}else{
+				mVideoView.setVideoPath(video.url);
+			}
+			if(video.isLive){
+				disableProgressBar();
+			}
 			mVideoView.setOnPreparedListener(new OnPreparedListener() {
 				@Override
 				public void onPrepared(MediaPlayer mp) {
@@ -174,9 +180,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				public boolean onInfo(MediaPlayer mp, int what, int extra) {
 					switch (what) {
 					case MediaPlayer.MEDIA_INFO_NOT_SEEKABLE:
-						mProgressBar.setMax(1);
-						mProgressBar.setProgress(1);
-						mProgressBar.setEnabled(false);
+						disableProgressBar();
 						break;
 
 					default:
@@ -184,6 +188,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 					}
 					return false;
 				}
+
 			});
 			mVideoView.setOnCompletionListener(new OnCompletionListener() {
 				
@@ -200,6 +205,11 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		}
 	}
 	
+	private void disableProgressBar() {
+		mProgressBar.setEnabled(false);
+		mProgressBar.setMax(1);
+		mProgressBar.setProgress(1);
+	}
 	private void setSeekBar() {
 		if(mProgressBar!=null){
 			mProgressBar.setEnabled(true);
@@ -409,8 +419,9 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 				mVideoView.seekTo(0);
 			}
 			mVideoView.start();
-			startUpdateProgress();
-			mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
+			if(!video.isLive){
+				startUpdateProgress();
+			}
 			mPlayBtn.setImageResource(R.drawable.icon_btn_pause);
 		}
 	}

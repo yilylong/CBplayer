@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_tv_list">
+        <item>凤凰卫视</item>
+    </string-array>
+    
+    <integer-array name="array_tv_icon">
+         <item>@drawable/tv_icon_fh</item>
+    </integer-array>
+    
+    <string-array name="array_tv_url">
+         <item>http://live.3gv.ifeng.com/zixun.m3u8</item>
+    </string-array>
+    
+</resources>

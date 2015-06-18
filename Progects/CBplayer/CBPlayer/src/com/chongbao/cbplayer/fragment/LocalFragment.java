@@ -38,7 +38,6 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
 	public static final String TAG = "LocalFragment";
     private ListView mListView;
     private ArrayList<MediaBean> mediaList;
-    private Dialog progressDialog;
     private LocalMediaAdapter mediaAdapter;
     private int count;
     public static LocalFragment getInstance(){
@@ -73,7 +72,7 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
     }
     
     private void initData() {
-    	showDialog();
+    	showDialog(R.string.msg_dialog_loading_local);
 		new MediaScanerTask().execute();
 	}
 
@@ -114,10 +113,10 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
     				null, null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
     				while(cursor.moveToNext()){
     					MediaBean bean = new MediaBean();
-    					bean.name=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME));
+    					bean.title=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME));
     					bean.duration=cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
     					bean.url=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
-    					bean.type=1;
+    					bean.thumb = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Thumbnails.DATA));
     					temp.add(bean);
     				}
     				
@@ -164,7 +163,7 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			MediaBean bean = mediaList.get(position);
-			viewHolder.info.setText(bean.name);
+			viewHolder.info.setText(bean.title);
 			return convertView;
 		}
     	
@@ -172,21 +171,6 @@ public class LocalFragment extends BaseFragment implements OnItemClickListener{
     private class ViewHolder{
     	ImageView icon;
     	TextView info;
-    }
-    @SuppressLint("NewApi")
-    private void showDialog(){
-    	if(progressDialog==null){
-    		progressDialog = DialogUtils.showProgressDialog(getActivity(), getString(R.string.msg_dialog_loading_local));
-    	}
-    	if(!getActivity().isDestroyed()){
-    		progressDialog.show();
-    	}
-    }
-    @SuppressLint("NewApi")
-	private void dismissDialog(){
-    	if(progressDialog!=null&&!getActivity().isDestroyed()){
-    		progressDialog.dismiss();
-    	}
     }
     
     

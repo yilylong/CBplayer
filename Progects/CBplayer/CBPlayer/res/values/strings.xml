@@ -10,6 +10,9 @@
     <string name="item_name_settings">设置</string>
     <string name="item_name_tv">TV</string>
     <!-- menuitem end -->
-    <string name="msg_dialog_loading_local">正在加载本地媒体文件...</string>
+    <string name="msg_dialog_loading_local">正在加载本地媒体文件 &#8230;</string>
+    <string name="msg_dialog_loading_TV">正在加载电视直播列表 &#8230;</string>
+    <string name="msg_toast_no_network">没有网络</string>
+    <string name="msg_dialog_not_wifi_tip">当前不是WIFI网络，需要继续使用流量播放吗？</string>
 
 </resources>
