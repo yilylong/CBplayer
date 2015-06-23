@@ -1,6 +1,8 @@
 package com.chongbao.cbplayer.activity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
@@ -65,6 +67,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	private AudioManager mAudioManager;
 	private MediaBean video;
 	private boolean isPlayFinished;
+	private static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 	/**定时隐藏控制层**/
 	private Handler mDismissHander = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -157,7 +160,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		if(video!=null){
 			videoInfo.setText(video.title);
 			if(video.isStream){
-				mVideoView.setVideoURI(Uri.parse("http://live.3gv.ifeng.com/zixun.m3u8"));
+				mVideoView.setVideoURI(Uri.parse(video.url));
 				mVideoView.setBufferSize(1024*50);
 			}else{
 				mVideoView.setVideoPath(video.url);
@@ -221,8 +224,11 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 			mProgressBar.setEnabled(true);
 			mProgressBar.setMax((int)mVideoView.getDuration());
 			mProgressBar.setProgress((int)mVideoView.getCurrentPosition());
-			timeProgress.setText(getTime(mVideoView.getCurrentPosition()));
-			timeTotal.setText(getTime(mVideoView.getDuration()));
+			if(!video.isLive){
+				timeProgress.setText(getTime(mVideoView.getCurrentPosition()));
+				timeTotal.setText(getTime(mVideoView.getDuration()));
+			}
+			
 		}
 		
 	}
@@ -459,28 +465,8 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 	}
 
 	private String getTime(long millis){
-		long seceonds = millis/1000;
-		long min = 0;
-		if(seceonds>=60){
-			min = seceonds/60;
-		}
-		long h = 0;
-		if(min>=60){
-			h = min/60;
-		}
-		StringBuffer bur = new StringBuffer();
-		if(h>=1){
-			bur.append("0"+h+":");
-		}
-		if(min>=1&&min<10){
-			bur.append("0"+h+":");
-		}else if(min>=1&&min>=10){
-			bur.append(h+":");
-		}
-		if(min<1){
-			bur.append("00:"+seceonds);
-		}
-		return bur.toString();
+		formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+		return formatter.format(millis);
 	}
 	
 }
