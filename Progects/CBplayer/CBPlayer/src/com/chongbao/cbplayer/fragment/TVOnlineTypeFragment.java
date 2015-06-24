@@ -24,25 +24,25 @@ import com.chongbao.cbplayer.constans.Constans;
 import com.yixia.zi.utils.ToastHelper;
 
 
-public class TVContentFragment extends BaseFragment implements OnItemClickListener {
+public class TVOnlineTypeFragment extends BaseFragment implements OnItemClickListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final String TAG = "TVFragment";
+	public static final String TAG = "TVOnlineTypeFragment";
     private ListView mListView;
     private ArrayList<MediaBean> TVList;
     private TVListAdapter listAdapter;
     private int TVtype;
     
-    public static TVContentFragment getInstance(int tvType){
-    	TVContentFragment fg = new TVContentFragment();
+    public static TVOnlineTypeFragment getInstance(int tvType){
+    	TVOnlineTypeFragment fg = new TVOnlineTypeFragment();
     	fg.TVtype = tvType;
     	return fg;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	View view = inflater.inflate(R.layout.fmlayout_tv, container, false);
+    	View view = inflater.inflate(R.layout.tv_online_type, container, false);
     	mListView = (ListView) view.findViewById(R.id.tv_listview);
     	TVList = new ArrayList<MediaBean>();
     	mListView.setAdapter(listAdapter = new TVListAdapter());
@@ -62,9 +62,39 @@ public class TVContentFragment extends BaseFragment implements OnItemClickListen
 	private void initTVList() {
 		// TODO 后期可从服务器加载，现在数据量小没有采用异步
 		showDialog(R.string.msg_dialog_loading_TV);
-		String[] tvtitles = getResources().getStringArray(R.array.array_tv_list);
-		String[] urls = getResources().getStringArray(R.array.array_tv_url);
-		TypedArray icons = getResources().obtainTypedArray(R.array.array_tv_icon);
+		String[] tvtitles = null;
+		String[] urls = null;
+		TypedArray icons =null; 
+		switch (TVtype) {
+		case Constans.TV_TYPE_CENTRAL:
+			tvtitles = getResources().getStringArray(R.array.array_tv_list_central);
+			urls = getResources().getStringArray(R.array.array_tv_url_central);
+			icons = getResources().obtainTypedArray(R.array.array_tv_icon_central);
+			break;
+		case Constans.TV_TYPE_INTERNAL:
+			tvtitles = getResources().getStringArray(R.array.array_tv_list_internal);
+			urls = getResources().getStringArray(R.array.array_tv_url_internal);
+			icons = getResources().obtainTypedArray(R.array.array_tv_icon_internal);
+			break;
+		case Constans.TV_TYPE_HK:
+			tvtitles = getResources().getStringArray(R.array.array_tv_list_hk);
+			urls = getResources().getStringArray(R.array.array_tv_url_hk);
+			icons = getResources().obtainTypedArray(R.array.array_tv_icon_hk);
+			break;
+		case Constans.TV_TYPE_JAPAN:
+			tvtitles = getResources().getStringArray(R.array.array_tv_list_japan);
+			urls = getResources().getStringArray(R.array.array_tv_url_japan);
+			icons = getResources().obtainTypedArray(R.array.array_tv_icon_japan);
+			break;
+		case Constans.TV_TYPE_EUROPE:
+			tvtitles = getResources().getStringArray(R.array.array_tv_list_europe);
+			urls = getResources().getStringArray(R.array.array_tv_url_europe);
+			icons = getResources().obtainTypedArray(R.array.array_tv_icon_europe);
+			break;
+
+		default:
+			break;
+		}
 		TVList.clear();
 		for(int i = 0;i<tvtitles.length;i++){
 			MediaBean bean = new MediaBean();
@@ -117,7 +147,7 @@ public class TVContentFragment extends BaseFragment implements OnItemClickListen
 			ViewHolder viewHolder = null;
 			if(convertView==null){
 				viewHolder = new ViewHolder();
-				convertView = LayoutInflater.from(TVContentFragment.this.getActivity()).inflate(R.layout.item_tvlist, parent, false);
+				convertView = LayoutInflater.from(TVOnlineTypeFragment.this.getActivity()).inflate(R.layout.item_tvlist, parent, false);
 				viewHolder.icon = (ImageView) convertView.findViewById(R.id.item_tv_icon);
 				viewHolder.info = (TextView) convertView.findViewById(R.id.item_tv_info);
 				convertView.setTag(viewHolder);

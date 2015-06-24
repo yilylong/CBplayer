@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.constans.Constans;
-import com.chongbao.cbplayer.fragment.TVContentFragment;
+import com.chongbao.cbplayer.fragment.TVOnlineTypeFragment;
 
-class IndicatorFragmentAdapter extends FragmentPagerAdapter{
+public class IndicatorFragmentAdapter extends FragmentPagerAdapter{
     protected static final Integer[] CONTENT = new Integer[] {
     	R.string.content_type_central,
     	R.string.content_type_internal,
@@ -40,7 +40,7 @@ class IndicatorFragmentAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return TVContentFragment.getInstance(TYPES[position % TYPES.length]);
+        return TVOnlineTypeFragment.getInstance(TYPES[position % TYPES.length]);
     }
 
     @Override

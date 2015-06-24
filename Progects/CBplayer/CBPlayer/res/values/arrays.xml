@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="array_tv_list">
-        <item>凤凰中文</item>
-        <item>凤凰资讯</item>
-        <item>凤凰香港</item>
+
+    <string-array name="array_tv_list_internal">
         <item>湖南卫视</item>
         <item>浙江卫视</item>
         <item>江苏卫视</item>
@@ -25,57 +23,141 @@
         <item>青海卫视</item>
         <item>旅游卫视</item>
     </string-array>
-    
-    <integer-array name="array_tv_icon">
-         <item>@drawable/tv_fhws</item>
-         <item>@drawable/tv_fhws</item>
-         <item>@drawable/tv_fhws</item>
-         <item>@drawable/tv_hnws</item>
-         <item>@drawable/tv_zjws</item>
-         <item>@drawable/tv_jsws</item>
-         <item>@drawable/tv_dfws</item>
-         <item>@drawable/tv_bjws</item>
-         <item>@drawable/tv_ahws</item>
-         <item>@drawable/tv_hbws</item>
-         <item>@drawable/tv_gdws</item>
-         <item>@drawable/tv_szws</item>
-         <item>@drawable/tv_sdws</item>
-         <item>@drawable/tv_tjws</item>
-         <item>@drawable/tv_lnws</item>
-         <item>@drawable/tv_hljws</item>
-         <item>@drawable/tv_gxws</item>
-         <item>@drawable/tv_fjws</item>
-         <item>@drawable/tv_scws</item>
-         <item>@drawable/tv_cqws</item>
-         <item>@drawable/tv_gsws</item>
-         <item>@drawable/tv_qhws</item>
-         <item>@drawable/tv_lyws</item>
-    </integer-array>
-    
-    <string-array name="array_tv_url">
-         <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
-         <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+    <string-array name="array_tv_list_hk">
+        <item>凤凰中文</item>
+        <item>凤凰资讯</item>
+        <item>凤凰香港</item>
     </string-array>
-    
+    <string-array name="array_tv_list_central">
+        <item>CCTV_1综合</item>
+        <item>CCTV_2财经</item>
+        <item>CCTV_3综艺</item>
+        <item>CCTV_4中文国际</item>
+        <item>CCTV_5体育</item>
+        <item>CCTV_6电影</item>
+        <item>CCTV_7军事/农业</item>
+        <item>CCTV_8电视剧</item>
+        <item>CCTV_9纪录</item>
+        <item>CCTV_10科教</item>
+        <item>CCTV_11戏曲</item>
+        <item>CCTV_12社会与法</item>
+        <item>CCTV_13新闻</item>
+        <item>CCTV_14少儿</item>
+        <item>CCTV_15音乐</item>
+        <item>CCTV_news</item>
+    </string-array>
+    <string-array name="array_tv_list_japan">
+        <item>韩国SBS</item>
+        <item>日本NHK</item>
+    </string-array>
+    <string-array name="array_tv_list_europe">
+        <item>DISCOVER</item>
+    </string-array>
+
+    <integer-array name="array_tv_icon_internal">
+        <item>@drawable/tv_hnws</item>
+        <item>@drawable/tv_zjws</item>
+        <item>@drawable/tv_jsws</item>
+        <item>@drawable/tv_dfws</item>
+        <item>@drawable/tv_bjws</item>
+        <item>@drawable/tv_ahws</item>
+        <item>@drawable/tv_hbws</item>
+        <item>@drawable/tv_gdws</item>
+        <item>@drawable/tv_szws</item>
+        <item>@drawable/tv_sdws</item>
+        <item>@drawable/tv_tjws</item>
+        <item>@drawable/tv_lnws</item>
+        <item>@drawable/tv_hljws</item>
+        <item>@drawable/tv_gxws</item>
+        <item>@drawable/tv_fjws</item>
+        <item>@drawable/tv_scws</item>
+        <item>@drawable/tv_cqws</item>
+        <item>@drawable/tv_gsws</item>
+        <item>@drawable/tv_qhws</item>
+        <item>@drawable/tv_lyws</item>
+    </integer-array>
+    <integer-array name="array_tv_icon_hk">
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+    </integer-array>
+    <integer-array name="array_tv_icon_central">
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+        <item>@drawable/tv_cctv</item>
+    </integer-array>
+    <integer-array name="array_tv_icon_japan">
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+    </integer-array>
+    <integer-array name="array_tv_icon_europe">
+        <item>@drawable/tv_fhws</item>
+    </integer-array>
+
+    <string-array name="array_tv_url_internal">
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+    </string-array>
+    <string-array name="array_tv_url_hk">
+        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
+        <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+    </string-array>
+    <string-array name="array_tv_url_central">
+        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
+        <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+    </string-array>
+    <string-array name="array_tv_url_japan">
+        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
+        <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
+    </string-array>
+    <string-array name="array_tv_url_europe">
+        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
+    </string-array>
+
 </resources>

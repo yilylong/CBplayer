@@ -160,7 +160,7 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		if(video!=null){
 			videoInfo.setText(video.title);
 			if(video.isStream){
-				mVideoView.setVideoURI(Uri.parse("http://101.71.8.19:554/hdmi/hntv1hd.stream/playlist.m3u8"));
+				mVideoView.setVideoURI(Uri.parse(video.url));
 				mVideoView.setBufferSize(1024*50);
 			}else{
 				mVideoView.setVideoPath(video.url);
