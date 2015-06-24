@@ -145,39 +145,42 @@ containing a value of this type.
         public static int spinner_disabled_holo_dark=0x7f02003a;
         public static int spinner_focused_holo_dark=0x7f02003b;
         public static int spinner_pressed_holo_dark=0x7f02003c;
-        public static int toast_frame=0x7f02003d;
+        public static int toast_bg=0x7f02003d;
+        public static int toast_frame=0x7f02003e;
     }
     public static final class id {
-        public static int arrow_down=0x7f0a0010;
-        public static int arrow_up=0x7f0a000f;
+        public static int arrow_down=0x7f0a0011;
+        public static int arrow_up=0x7f0a0010;
         public static int btn_cancel=0x7f0a0001;
         public static int btn_ok=0x7f0a0002;
         public static int color_picker_view=0x7f0a0000;
         public static int discard=0x7f0a0005;
         public static int image=0x7f0a0003;
-        public static int iv_icon=0x7f0a0011;
-        public static int line=0x7f0a0014;
-        public static int mediacontroller_file_name=0x7f0a000c;
-        public static int mediacontroller_play_pause=0x7f0a0008;
-        public static int mediacontroller_seekbar=0x7f0a000b;
-        public static int mediacontroller_time_current=0x7f0a0009;
-        public static int mediacontroller_time_total=0x7f0a000a;
+        public static int iv_icon=0x7f0a0012;
+        public static int line=0x7f0a0015;
+        public static int mediacontroller_file_name=0x7f0a000d;
+        public static int mediacontroller_play_pause=0x7f0a0009;
+        public static int mediacontroller_seekbar=0x7f0a000c;
+        public static int mediacontroller_time_current=0x7f0a000a;
+        public static int mediacontroller_time_total=0x7f0a000b;
+        public static int message=0x7f0a0008;
         public static int rotateLeft=0x7f0a0006;
         public static int rotateRight=0x7f0a0007;
         public static int save=0x7f0a0004;
-        public static int scroller=0x7f0a000d;
-        public static int title_icon=0x7f0a0013;
-        public static int tracks=0x7f0a000e;
-        public static int tv_title=0x7f0a0012;
+        public static int scroller=0x7f0a000e;
+        public static int title_icon=0x7f0a0014;
+        public static int tracks=0x7f0a000f;
+        public static int tv_title=0x7f0a0013;
     }
     public static final class layout {
         public static int colorpicker=0x7f030000;
         public static int common_dialog_layout=0x7f030001;
         public static int cropimage=0x7f030002;
-        public static int mediacontroller=0x7f030003;
-        public static int quickaction=0x7f030004;
-        public static int quickaction_item=0x7f030005;
-        public static int title=0x7f030006;
+        public static int custom_toast_layout=0x7f030003;
+        public static int mediacontroller=0x7f030004;
+        public static int quickaction=0x7f030005;
+        public static int quickaction_item=0x7f030006;
+        public static int title=0x7f030007;
     }
     public static final class raw {
         public static int libarm=0x7f050000;

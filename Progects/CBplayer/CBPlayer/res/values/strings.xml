@@ -14,5 +14,11 @@
     <string name="msg_dialog_loading_TV">正在加载电视直播列表 &#8230;</string>
     <string name="msg_toast_no_network">没有网络</string>
     <string name="msg_dialog_not_wifi_tip">当前不是WIFI网络，需要继续使用流量播放吗？</string>
+    
+    <string name="content_type_central">央视</string>
+    <string name="content_type_internal">卫视</string>
+    <string name="content_type_hk">港澳台</string>
+    <string name="content_type_japan">日韩</string>
+    <string name="content_type_europe">欧美</string>
 
 </resources>
