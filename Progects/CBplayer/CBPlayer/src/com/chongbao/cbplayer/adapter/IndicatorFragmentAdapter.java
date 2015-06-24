@@ -41,6 +41,7 @@ public class IndicatorFragmentAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         return TVOnlineTypeFragment.getInstance(TYPES[position % TYPES.length]);
+
     }
 
     @Override
