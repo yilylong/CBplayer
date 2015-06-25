@@ -3,7 +3,7 @@
     android:id="@+id/dialog_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FAFAFA"
+    android:background="@drawable/dialog_bg"
     android:orientation="vertical" >
 
     <!-- 对话框标题 和图标 -->
@@ -18,7 +18,7 @@
             android:id="@+id/dialog_icon"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#009ACD" />
+            android:background="@color/common_divider_line" />
 
         <TextView
             android:id="@+id/dialog_title"
@@ -27,14 +27,13 @@
             android:layout_weight="1"
             android:gravity="center_vertical|left"
             android:text="提示"
-            android:textColor="#282828"
+            android:textColor="@color/secdonary_text_color"
             android:paddingLeft="20dp"
             android:textSize="15sp" />
         <ImageView
-            android:id="@+id/dialog_icon"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#009ACD" />
+            android:background="@color/common_divider_line" />
     </LinearLayout>
 
     <!-- 对话框消息内容 -->
@@ -73,29 +72,27 @@
 
         <!-- 对话框确定/取消按钮 -->
 
-        <TextView
+        <Button
             android:id="@+id/dialog_posi_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_dialog_left"
-            android:clickable="true"
+            android:background="@drawable/btn_dialog_bg"
             android:gravity="center"
             android:text="确定"
-            android:textColor="#000001"
+            android:textColor="@color/color_white"
             android:textSize="15sp" />
 
-        <TextView
+        <Button
             android:id="@+id/dialog_neg_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/btn_dialog_right"
-            android:clickable="true"
+            android:background="@drawable/btn_dialog_bg"
             android:gravity="center"
             android:text="取消"
-            android:textColor="#000001"
+            android:textColor="@color/color_white"
             android:textSize="15sp" />
     </LinearLayout>
 

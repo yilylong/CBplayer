@@ -20,5 +20,11 @@
     <string name="content_type_hk">港澳台</string>
     <string name="content_type_japan">日韩</string>
     <string name="content_type_europe">欧美</string>
+    
+    
+    <string name="msg_dialog_play_valid_stream">不是有效的流媒体文件</string>
+    <string name="msg_dialog_play_error">无法播放该视频</string>
+    <string name="msg_dialog_tip_title">Sorry!</string>
+    <string name="msg_dialog_btn_ok">OK</string>
 
 </resources>

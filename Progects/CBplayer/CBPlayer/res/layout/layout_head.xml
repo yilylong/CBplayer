@@ -12,7 +12,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="#35C7AA" />
+            android:background="@color/common_divider_line" />
 
         <FrameLayout
             android:layout_width="fill_parent"

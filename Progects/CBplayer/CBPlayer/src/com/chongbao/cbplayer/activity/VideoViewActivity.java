@@ -7,10 +7,12 @@ import java.util.TimeZone;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.MediaPlayer.OnCompletionListener;
+import io.vov.vitamio.MediaPlayer.OnErrorListener;
 import io.vov.vitamio.MediaPlayer.OnInfoListener;
 import io.vov.vitamio.MediaPlayer.OnPreparedListener;
 import io.vov.vitamio.widget.VideoView;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -31,10 +33,11 @@ import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.bean.MediaBean;
 import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.BrightnessUtil;
+import com.chongbao.cbplayer.utils.DialogBuilder;
 import com.chongbao.cbplayer.utils.MeasureUtil;
 import com.chongbao.cbplayer.view.CBProgressBar;
 
-public class VideoViewActivity extends Activity implements OnClickListener{
+public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	public static final String TAG ="VideoViewActivity";
 	public static final int MSG_DISIMISS = 0;
 	public static final int MSG_SHOW = 1;
@@ -207,6 +210,27 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 					mProgressHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
 					isPlayFinished = true;
 					showControlFrame();
+				}
+			});
+			mVideoView.setOnErrorListener(new OnErrorListener() {
+				
+				@Override
+				public boolean onError(MediaPlayer mp, int what, int extra) {
+					// TODO Auto-generated method stub
+					if(what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK){
+						showTipDialog(getString(R.string.msg_dialog_tip_title), getString(R.string.msg_dialog_play_valid_stream), getString(R.string.msg_dialog_btn_ok), null);
+					}else{
+						showTipDialog(getString(R.string.msg_dialog_tip_title), getString(R.string.msg_dialog_play_error), getString(R.string.msg_dialog_btn_ok), new DialogBuilder.onDialogbtnClickListener() {
+							
+							@Override
+							public void onDialogbtnClick(Context context, Dialog dialog, int dialogId,
+									int whichBtn) {
+								VideoViewActivity.this.finish();
+							}
+						});
+					}
+					// return true 截断后面的弹框
+					return true;
 				}
 			});
 			
@@ -468,5 +492,6 @@ public class VideoViewActivity extends Activity implements OnClickListener{
 		formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
 		return formatter.format(millis);
 	}
+	
 	
 }

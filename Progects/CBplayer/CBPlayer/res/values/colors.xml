@@ -1,30 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_white">#FFFFFF</color>
+
+    <color name="color_white">#ffffffff</color>
     <color name="color_transparent">#000000</color>
-    
     <color name="percent_text_color_default">#2196F3</color>
     <color name="progressbar_bg_color_default">#00BCD4</color>
     <color name="progress_color_default">#00BCD4</color>
-    
     <color name="video_view_control_show_bg">#55212121</color>
     <color name="video_view_control_show_bg2">#66212121</color>
     <color name="video_play_videoinfo_textcolor">#FFFFFF</color>
-    
     <color name="cbprogressbar_bgcolor">#BBDEFB</color>
     <color name="cbprogressbar_progresscolor">#00BCD4</color>
-    
     <color name="item_divider_color">#B6B6B6</color>
+    <color name="common_divider_line">#35C7AA</color>
     
-    
+    <color name="secdonary_text_color">#212121</color>
+
     <!-- 自定义对话框 -->
     <color name="bg_dialog_normal">#EFEFEF</color>
     <color name="bg_item_press">#459EDA</color>
     <color name="bg_item_normal">#EFEFEF</color>
-    
-    
-    
     <color name="tip_textcolor">#727272</color>
-    
-    
+
 </resources>

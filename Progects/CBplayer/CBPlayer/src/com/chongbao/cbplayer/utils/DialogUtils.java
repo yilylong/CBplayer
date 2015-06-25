@@ -1,6 +1,7 @@
 package com.chongbao.cbplayer.utils;
 
 import com.chongbao.cbplayer.R;
+import com.chongbao.cbplayer.utils.DialogBuilder.onDialogbtnClickListener;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -66,10 +67,11 @@ public class DialogUtils {
 	 * @param msg
 	 * @return
 	 */
-	public static Dialog showSingleBtnDialog(Context context,String title,String msg){
+	public static Dialog showSingleBtnDialog(Context context,String title,String msg,String btnmsg){
 		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_BLUE)
 		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
+		.setButtons(btnmsg, null, true, null)
 		.setTitle(title)
 		.setMessage(msg)
 		.create();
@@ -83,12 +85,31 @@ public class DialogUtils {
 	 * @param isSytemAlert 是否是系统级别的弹框
 	 * @return
 	 */
-	public static Dialog showSingleBtnDialog(Context context,String title,String msg,boolean isSytemAlert){
+	public static Dialog showSingleBtnDialog(Context context,String title,String msg,boolean isSytemAlert,String btnmsg){
 		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_BLUE,isSytemAlert)
+		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
+		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
+		.setButtons(btnmsg, null, true, null)
+		.setTitle(title)
+		.setMessage(msg)
+		.create();
+	}
+	/**
+	 * 显示一个单个按钮的对话框并添加点击回调接口
+	 * @param context
+	 * @param title
+	 * @param msg
+	 * @param btnmsg
+	 * @param listener 按钮点击回调接口
+	 * @return
+	 */
+	public static Dialog showSingleBtnDialog(Context context,String title,String msg,String btnmsg,onDialogbtnClickListener listener){
+		return new DialogBuilder(context, 0, DialogBuilder.DIALOG_STYLE_BLUE)
 		.setDialoglocation(DialogBuilder.DIALOG_LOCATION_CENTER)
 		.setWindowAnimation(DialogBuilder.DIALOG_ANIM_SLID_BOTTOM)
 		.setTitle(title)
 		.setMessage(msg)
+		.setButtons(btnmsg, null, true, listener)
 		.create();
 	}
 	

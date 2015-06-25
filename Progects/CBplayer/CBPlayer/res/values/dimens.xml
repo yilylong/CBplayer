@@ -15,5 +15,5 @@
     <dimen name="play_control_videoinfo_textsize">16sp</dimen>
     
     <dimen name="cbprogressbar_rect_rount">2dp</dimen>
-     <dimen name="dialog_btn_single_LeftRightmargin">100dp</dimen>
+     <dimen name="dialog_btn_single_LeftRightmargin">40dp</dimen>
 </resources>
