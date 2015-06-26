@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -57,6 +58,8 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	private RelativeLayout mControlResultRLayout;
 	/**整个控制层布局**/
 	private RelativeLayout mControlRLayout;
+	
+	private LinearLayout loadingTip;
 	
 	/**音量/亮度图标**/
 	private ImageView mControlResultIcon;
@@ -140,6 +143,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		mControlResultIcon = (ImageView) findViewById(R.id.icon_control_show);
 		mControlResultRLayout = (RelativeLayout) findViewById(R.id.control_showresult_rl);
 		mControlRLayout = (RelativeLayout) findViewById(R.id.control_RLayout);
+		loadingTip = (LinearLayout) findViewById(R.id.loading_tip);
 		mPlayBtn.setOnClickListener(this);
 		mProgressBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
@@ -173,9 +177,10 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	private void initVideo() {
 		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
 		if(video!=null){
+			showLoadingTip();
 			videoInfo.setText(video.title);
 			if(video.isStream){
-				mVideoView.setVideoURI(Uri.parse(video.url));
+				mVideoView.setVideoURI(Uri.parse("http://121.58.54.150/PLTV/88888888/224/0/3221225734/iptv18195.smil"));
 				mVideoView.setBufferSize(1024*50);
 			}else{
 				mVideoView.setVideoPath(video.url);
@@ -186,6 +191,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 			mVideoView.setOnPreparedListener(new OnPreparedListener() {
 				@Override
 				public void onPrepared(MediaPlayer mp) {
+					dismissLoadingTip();
 					setSeekBar();
 					setInvisibleDelay();
 					mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, mVideoView.getVideoAspectRatio());
@@ -228,6 +234,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 				
 				@Override
 				public boolean onError(MediaPlayer mp, int what, int extra) {
+					dismissLoadingTip();
 					// TODO Auto-generated method stub
 					if(what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK){
 						showTipDialog(getString(R.string.msg_dialog_tip_title), getString(R.string.msg_dialog_play_valid_stream), getString(R.string.msg_dialog_btn_ok), null);
@@ -545,5 +552,15 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		return formatter.format(millis);
 	}
 	
+	private void showLoadingTip(){
+		if(loadingTip!=null){
+			loadingTip.setVisibility(View.VISIBLE);
+		}
+	}
+	private void dismissLoadingTip(){
+		if(loadingTip!=null){
+			loadingTip.setVisibility(View.GONE);
+		}
+	}
 	
 }

@@ -15,6 +15,7 @@
     <color name="common_divider_line">#35C7AA</color>
     
     <color name="secdonary_text_color">#212121</color>
+    <color name="dialog_bg_color">#aa727272</color>
 
     <!-- 自定义对话框 -->
     <color name="bg_dialog_normal">#EFEFEF</color>
