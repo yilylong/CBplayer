@@ -26,5 +26,6 @@
     <string name="msg_dialog_play_error">无法播放该视频</string>
     <string name="msg_dialog_tip_title">Sorry!</string>
     <string name="msg_dialog_btn_ok">OK</string>
+    <string name="msg_dialog_play_loading">正在加载，请稍后&#8230;</string>
 
 </resources>

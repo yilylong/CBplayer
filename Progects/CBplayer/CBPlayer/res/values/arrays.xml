@@ -27,6 +27,9 @@
         <item>凤凰中文</item>
         <item>凤凰资讯</item>
         <item>凤凰香港</item>
+        <item>资讯卫视</item>
+        <item>澳门卫视</item>
+        <item>宏观卫视</item>
     </string-array>
     <string-array name="array_tv_list_central">
         <item>CCTV_1综合</item>
@@ -45,10 +48,11 @@
         <item>CCTV_14少儿</item>
         <item>CCTV_15音乐</item>
         <item>CCTV_news</item>
+        <item>新华社中文台</item>
     </string-array>
     <string-array name="array_tv_list_japan">
-        <item>韩国SBS</item>
-        <item>日本NHK</item>
+        <item>韩国KCTV</item>
+        <item>阿里国际</item>
     </string-array>
     <string-array name="array_tv_list_europe">
         <item>DISCOVER</item>
@@ -80,8 +84,12 @@
         <item>@drawable/tv_fhws</item>
         <item>@drawable/tv_fhws</item>
         <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
     </integer-array>
     <integer-array name="array_tv_icon_central">
+        <item>@drawable/tv_cctv</item>
         <item>@drawable/tv_cctv</item>
         <item>@drawable/tv_cctv</item>
         <item>@drawable/tv_cctv</item>
@@ -133,6 +141,9 @@
         <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
         <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>rtmp://58.221.254.33:1935/live/zhongwen.sdp</item>
+        <item>rtmp://live2.tdm.com.mo:80/tv/ch3.live</item>
+        <item>http://mobile.ccdntech.com/live/_definst_/vod62_Live/live1/playlist.m3u8</item>
     </string-array>
     <string-array name="array_tv_url_central">
         <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
@@ -151,10 +162,11 @@
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://mobile.xinhuashixun.com/Live/cncHD.m3u8</item>
     </string-array>
     <string-array name="array_tv_url_japan">
-        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
-        <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
+        <item>http://122.202.129.136:1935/live/ch5/playlist.m3u8</item>
+        <item>http://worldlive-ios.arirang.co.kr/cdnlive-hls/arirangwlive/_definst_/liveevent/tvworld4.m3u8</item>
     </string-array>
     <string-array name="array_tv_url_europe">
         <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>

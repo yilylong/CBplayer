@@ -9,14 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--
-         <FrameLayout
-        android:id="@+id/bg_novideo_default"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_videoview_default" />
-    -->
-
     <RelativeLayout
         android:id="@+id/control_RLayout"
         android:layout_width="match_parent"
@@ -36,9 +28,9 @@
             android:paddingRight="@dimen/control_rl_padding"
             android:singleLine="true"
             android:text="苍老师退役了.avi"
-            android:typeface="serif"
             android:textColor="@color/video_play_videoinfo_textcolor"
-            android:textSize="@dimen/play_control_videoinfo_textsize" />
+            android:textSize="@dimen/play_control_videoinfo_textsize"
+            android:typeface="serif" />
 
         <!-- 中间的操作显示结果 -->
 
@@ -101,8 +93,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
-                android:textColor="@color/video_play_videoinfo_textcolor"
-                android:text="00:00" />
+                android:text="00:00"
+                android:textColor="@color/video_play_videoinfo_textcolor" />
 
             <SeekBar
                 android:id="@id/play_progressbar"
@@ -125,10 +117,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/video_play_videoinfo_textcolor"
                 android:gravity="center"
-                android:text="00:00" />
+                android:text="00:00"
+                android:textColor="@color/video_play_videoinfo_textcolor" />
         </LinearLayout>
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/loading_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/toast_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/progress_load" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/msg_dialog_play_loading"
+            android:textColor="@color/color_white" />
+    </LinearLayout>
 
 </FrameLayout>
