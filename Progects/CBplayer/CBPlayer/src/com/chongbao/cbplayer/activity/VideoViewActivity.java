@@ -35,6 +35,7 @@ import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.BrightnessUtil;
 import com.chongbao.cbplayer.utils.DialogBuilder;
 import com.chongbao.cbplayer.utils.MeasureUtil;
+import com.chongbao.cbplayer.utils.SharedPrencesUtils;
 import com.chongbao.cbplayer.view.CBProgressBar;
 
 public class VideoViewActivity extends BaseActivity implements OnClickListener{
@@ -151,13 +152,24 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-				if(fromUser&&!video.isStream){
+				if(fromUser&&!video.isLive){
 					seek(progress);
 				}
 			}
 		});
+		
+		// 设置屏幕亮度  刚开始进来 默认亮度很低  可以将设置的值保存起来
+		setBrightness();
 	}
 	
+	private void setBrightness() {
+		float curBrightness = SharedPrencesUtils.getInstance(this).getFloat(Constans.SP_KEY_BRIGHTNESS);
+		if(curBrightness!=-1){
+			BrightnessUtil.setBrightness(this, curBrightness);
+		}
+	}
+
+
 	private void initVideo() {
 		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
 		if(video!=null){
@@ -297,6 +309,9 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 				if(Math.abs(dy)<=mTouchSlop&&Math.abs(dx)>mTouchSlop&&Math.abs(dx)>50){// 横向滑动
 					// TODO 快进/快退
 					Log.i(TAG, "dx=="+dx+"---dy="+dy+"-----中间滑动");
+					if(video!=null&&!video.isLive){
+						seekForward(dx);
+					}
 				}
 			}
 			
@@ -315,6 +330,35 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		return super.onTouchEvent(event);
 	}
 	
+	
+	/**
+	 * 快进快退
+	 * @param dx
+	 */
+	private void seekForward(float dx) {
+		long duration = mVideoView.getDuration();
+		if(dx>0){// 快进
+			if(mVideoView.getCurrentPosition()<=duration-50){
+				long seek = (long) ((dx/mScreenW/2)*(duration/3));
+				long seekTo = mVideoView.getCurrentPosition()+seek;
+				if(seekTo>duration){
+					seekTo = duration;
+				}
+				seek(seekTo);
+			}
+		}else{
+			if(mVideoView.getCurrentPosition()>0){
+				long seek = (long) ((Math.abs(dx)/mScreenW/2)*(duration/3));
+				long seekTo = mVideoView.getCurrentPosition()-seek;
+				if(seekTo<=0){
+					seekTo = 0;
+				}
+				seek(seekTo);
+			}
+		}
+	}
+
+
 	/**
 	 * 调整亮度(activity 的亮度值是0-1的浮点数)
 	 * @param dy
@@ -324,8 +368,12 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		// 先关闭系统的自动亮度调节
 		BrightnessUtil.setBrightnesMode(this, 0);
 		float currentBrightness = BrightnessUtil.getCurrentActivityBrightness(this);
+		// 刚开始获取的亮度是负值
+		if(currentBrightness<0){
+			currentBrightness = 0.05f;
+		}
 		showBrightnessControl(currentBrightness);
-		float percent = Math.abs((float)dy)/mScreenH;
+		float percent = Math.abs((float)dy)/mScreenH/5;
 		if(dy<0){// 亮度增加
 			if(currentBrightness<1){
 				currentBrightness+=percent;
@@ -345,6 +393,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 				mCBProgressBar.setProgress((int)(maxBirghtness*currentBrightness));
 			}
 		}
+		SharedPrencesUtils.getInstance(this).saveFloat(Constans.SP_KEY_BRIGHTNESS, currentBrightness);
 		
 	}
 
@@ -353,17 +402,20 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	 * 调整音量
 	 * @param dy
 	 */
-	private void judgeVolume(int dy) {
+	private void judgeVolume(float dy) {
 		if(mAudioManager==null){
 			mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		}
 		showVolumeControl(mAudioManager);
 		int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		int average = mScreenH/15;
+		int add = (int) ((Math.abs(dy)/mScreenH)*2);
+		if(add==0){
+			add = 1;
+		}
 		if(dy<0){// 音量增大
 			if(currentVolume<maxVolume){
-				currentVolume+=Math.floor(Math.abs(dy)/average);
+				currentVolume+=add;
 				if(currentVolume>=maxVolume){
 					currentVolume = maxVolume;
 				}
@@ -372,7 +424,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 			mCBProgressBar.setProgress(currentVolume);
 		}else{// 音量-
 			if(currentVolume>0){
-				currentVolume-=Math.floor(Math.abs(dy)/average);
+				currentVolume-=add;
 				if(currentVolume<=0){
 					currentVolume = 0;
 				}
