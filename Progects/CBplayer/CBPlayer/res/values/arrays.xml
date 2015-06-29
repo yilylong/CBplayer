@@ -16,7 +16,7 @@
         <item>辽宁卫视</item>
         <item>黑龙江卫视</item>
         <item>广西卫视</item>
-        <item>福建卫视</item>
+        <item>东南卫视</item>
         <item>四川卫视</item>
         <item>重庆卫视</item>
         <item>甘肃卫视</item>
@@ -30,6 +30,42 @@
         <item>资讯卫视</item>
         <item>澳门卫视</item>
         <item>宏观卫视</item>
+        <item>本港台</item>
+        <item>衛視中文</item>
+        <item>衛視體育</item>
+        <item>明珠台</item>
+        <item>TVB8</item>
+        <item>TVB星河</item>
+        <item>陽光衛視</item>
+        <item>華娛</item>
+        <item>翡翠台HD</item>
+        <item>互動新聞HD</item>
+        <item>ATV亞洲HD</item>
+        <item>台視HD</item>
+        <item>中視HD</item>
+        <item>華視</item>
+        <item>民視HD</item>
+        <item>中天綜合</item>
+        <item>中天亞洲</item>
+        <item>中天娛樂</item>
+        <item>中天新聞</item>
+        <item>東森綜合</item>
+        <item>東森財經新聞</item>
+        <item>東森洋片</item>
+        <item>東森戲劇</item>
+        <item>東森電影</item>
+        <item>緯來綜合</item>
+        <item>緯來電影</item>
+        <item>緯來體育</item>
+        <item>緯來日本</item>
+        <item>緯來戲劇</item>
+        <item>新視覺HD</item>
+        <item>TVBS</item>
+        <item>TVBS新聞</item>
+        <item>TVBS歡樂台</item>
+        <item>公視</item>
+        <item>衛視電影</item>
+        <item>衛視西片HD</item>
     </string-array>
     <string-array name="array_tv_list_central">
         <item>CCTV_1综合</item>
@@ -55,7 +91,9 @@
         <item>阿里国际</item>
     </string-array>
     <string-array name="array_tv_list_europe">
-        <item>DISCOVER</item>
+        <item>BBCWORLDNEWS</item>
+        <item>CNN</item>
+        <item>ATVWORLD</item>
     </string-array>
 
     <integer-array name="array_tv_icon_internal">
@@ -87,6 +125,38 @@
         <item>@drawable/tv_fhws</item>
         <item>@drawable/tv_fhws</item>
         <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
     </integer-array>
     <integer-array name="array_tv_icon_central">
         <item>@drawable/tv_cctv</item>
@@ -110,58 +180,98 @@
     <integer-array name="array_tv_icon_japan">
         <item>@drawable/tv_fhws</item>
         <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
     </integer-array>
     <integer-array name="array_tv_icon_europe">
+        <item>@drawable/tv_fhws</item>
+        <item>@drawable/tv_fhws</item>
         <item>@drawable/tv_fhws</item>
     </integer-array>
 
     <string-array name="array_tv_url_internal">
+        <item>http://38.121.64.163:9297</item>
+        <item>http://38.121.64.163:9186</item>
+        <item>http://38.121.64.163:9299</item>
+        <item>http://38.121.64.163:9761</item>
+        <item>http://38.121.64.163:9266</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://38.121.64.163:9112</item>
+        <item>http://38.121.64.163:9188</item>
+        <item>http://38.121.64.163:9750</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://38.121.64.163:9888</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://38.121.64.163:9191</item>
+        <item>http://38.121.64.163:9767</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://38.121.64.163:9181</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
     </string-array>
     <string-array name="array_tv_url_hk">
-        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
-        <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
+        <item>http://38.121.64.163:9892</item>
+        <item>http://38.121.64.163:9891</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>rtmp://58.221.254.33:1935/live/zhongwen.sdp</item>
         <item>rtmp://live2.tdm.com.mo:80/tv/ch3.live</item>
         <item>http://mobile.ccdntech.com/live/_definst_/vod62_Live/live1/playlist.m3u8</item>
+        <item>http://38.121.64.163:9749</item>
+        <item>http://38.121.64.163:9632</item>
+        <item>http://38.121.64.163:9633</item>
+        <item>http://38.121.64.163:9194</item>
+        <item>http://38.121.64.163:9195</item>
+        <item>http://38.121.64.163:9196</item>
+        <item>http://38.121.64.163:9197</item>
+        <item>http://38.121.64.163:9198</item>
+        <item>http://38.121.64.163:9559</item>
+        <item>http://38.121.64.163:9562</item>
+        <item>http://38.121.64.163:9563</item>
+        <item>http://38.121.64.163:9626</item>
+        <item>http://38.121.64.163:9627</item>
+        <item>http://38.121.64.163:9628</item>
+        <item>http://38.121.64.163:9629</item>
+        <item>http://38.121.64.163:9613</item>
+        <item>http://38.121.64.163:9033</item>
+        <item>http://38.121.64.163:9034</item>
+        <item>http://38.121.64.163:9596</item>
+        <item>http://38.121.64.163:9607</item>
+        <item>http://38.121.64.163:9152</item>
+        <item>http://38.121.64.163:9153</item>
+        <item>http://38.121.64.163:9155</item>
+        <item>http://38.121.64.163:9630</item>
+        <item>http://38.121.64.163:9156</item>
+        <item>http://38.121.64.163:9157</item>
+        <item>http://38.121.64.163:9634</item>
+        <item>http://38.121.64.163:9639</item>
+        <item>http://38.121.64.163:9618</item>
+        <item>http://38.121.64.163:9118</item>
+        <item>http://38.121.64.163:9572</item>
+        <item>http://38.121.64.163:9620</item>
+        <item>http://38.121.64.163:9614</item>
+        <item>http://38.121.64.163:9611</item>
+        <item>http://38.121.64.163:9597</item>
+        <item>http://38.121.64.163:9612</item>
+        
     </string-array>
     <string-array name="array_tv_url_central">
-        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
-        <item>http://live.3gv.ifeng.com/live/FHZXHD.m3u8</item>
+        <item>http://38.121.64.163:9111</item>
+        <item>http://38.121.64.163:9088</item>
+        <item>http://38.121.64.163:9173</item>
+        <item>http://38.121.64.163:9761</item>
+        <item>http://38.121.64.163:9112</item>
+        <item>http://38.121.64.163:9045</item>
+        <item>http://38.121.64.163:9045</item>
+        <item>http://38.121.64.163:9176</item>
+        <item>http://38.121.64.163:9177</item>
+        <item>http://38.121.64.163:9888</item>
+        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://38.121.64.163:9766</item>
+        <item>http://38.121.64.163:9767</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
         <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
-        <item>http://live.3gv.ifeng.com/live/hongkong.m3u8</item>
+        <item>http://38.121.64.163:9181</item>
         <item>http://mobile.xinhuashixun.com/Live/cncHD.m3u8</item>
     </string-array>
     <string-array name="array_tv_url_japan">
@@ -169,7 +279,9 @@
         <item>http://worldlive-ios.arirang.co.kr/cdnlive-hls/arirangwlive/_definst_/liveevent/tvworld4.m3u8</item>
     </string-array>
     <string-array name="array_tv_url_europe">
-        <item>http://live.3gv.ifeng.com/live/zhongwen.m3u8?fmt=x264_0k_mpegt</item>
+        <item>http://38.121.64.163:9061</item>
+        <item>http://38.121.64.163:9062</item>
+        <item>http://38.121.64.163:9564</item>
     </string-array>
 
 </resources>
