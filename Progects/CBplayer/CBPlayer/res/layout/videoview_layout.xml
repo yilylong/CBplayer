@@ -17,21 +17,40 @@
 
         <!-- 播放的视频信息 -->
 
-        <TextView
-            android:id="@id/video_info"
+        <LinearLayout
+            android:id="@+id/ll_play_info_bar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:background="@color/video_view_control_show_bg2"
-            android:ellipsize="marquee"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/control_rl_padding"
-            android:paddingRight="@dimen/control_rl_padding"
-            android:singleLine="true"
-            android:text="苍老师退役了.avi"
-            android:textColor="@color/video_play_videoinfo_textcolor"
-            android:textSize="@dimen/play_control_videoinfo_textsize"
-            android:typeface="serif" />
+            android:orientation="horizontal"
+            android:paddingRight="20dp" >
 
+            <TextView
+                android:id="@id/video_info"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/control_rl_padding"
+                android:paddingRight="@dimen/control_rl_padding"
+                android:singleLine="true"
+                android:text="苍老师退役了.avi"
+                android:textColor="@color/video_play_videoinfo_textcolor"
+                android:textSize="@dimen/play_control_videoinfo_textsize"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/tv_change_chanle"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:drawableRight="@drawable/icon_play_change_chanle"
+                android:gravity="center"
+                android:text="@string/text_play_change_chanle"
+                android:textColor="@color/video_play_videoinfo_textcolor" />
+        </LinearLayout>
         <!-- 中间的操作显示结果 -->
 
         <RelativeLayout
@@ -121,6 +140,30 @@
                 android:text="00:00"
                 android:textColor="@color/video_play_videoinfo_textcolor" />
         </LinearLayout>
+
+        <!-- 直播电视频道切换 -->
+
+        <FrameLayout
+            android:id="@+id/fraLayout_chanlelist"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:layout_above="@id/paly_control_ll"
+            android:layout_alignParentRight="true"
+            android:background="@color/video_view_control_show_bg"
+            android:visibility="gone"
+            android:layout_below="@id/ll_play_info_bar" >
+
+            <ListView
+                android:id="@+id/play_frame_chanle_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="@color/color_transparent"
+                android:divider="@color/item_divider_color"
+                android:dividerHeight="0.5dp"
+                android:fadeScrollbars="true"
+                android:fadingEdge="none"
+                android:scrollbars="none" />
+        </FrameLayout>
     </RelativeLayout>
 
     <LinearLayout

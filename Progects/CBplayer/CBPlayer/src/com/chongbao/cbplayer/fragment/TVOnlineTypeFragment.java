@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.activity.VideoViewActivity;
 import com.chongbao.cbplayer.bean.MediaBean;
+import com.chongbao.cbplayer.bean.TVLive;
 import com.chongbao.cbplayer.constans.Constans;
 import com.yixia.zi.utils.ToastHelper;
 
@@ -34,6 +35,7 @@ public class TVOnlineTypeFragment extends BaseFragment implements OnItemClickLis
     private ArrayList<MediaBean> TVList;
     private TVListAdapter listAdapter;
     private int TVtype;
+    private TVLive mTVlive;
     
     public static TVOnlineTypeFragment getInstance(int tvType){
     	TVOnlineTypeFragment fg = new TVOnlineTypeFragment();
@@ -61,6 +63,7 @@ public class TVOnlineTypeFragment extends BaseFragment implements OnItemClickLis
      */
 	private void initTVList() {
 		// TODO 后期可从服务器加载，现在数据量小没有采用异步
+		mTVlive = new TVLive();
 		showDialog(R.string.msg_dialog_loading_TV);
 		String[] tvtitles = null;
 		String[] urls = null;
@@ -70,26 +73,31 @@ public class TVOnlineTypeFragment extends BaseFragment implements OnItemClickLis
 			tvtitles = getResources().getStringArray(R.array.array_tv_list_central);
 			urls = getResources().getStringArray(R.array.array_tv_url_central);
 			icons = getResources().obtainTypedArray(R.array.array_tv_icon_central);
+			mTVlive.tvType=Constans.TV_TYPE_CENTRAL;
 			break;
 		case Constans.TV_TYPE_INTERNAL:
 			tvtitles = getResources().getStringArray(R.array.array_tv_list_internal);
 			urls = getResources().getStringArray(R.array.array_tv_url_internal);
 			icons = getResources().obtainTypedArray(R.array.array_tv_icon_internal);
+			mTVlive.tvType=Constans.TV_TYPE_INTERNAL;
 			break;
 		case Constans.TV_TYPE_HK:
 			tvtitles = getResources().getStringArray(R.array.array_tv_list_hk);
 			urls = getResources().getStringArray(R.array.array_tv_url_hk);
 			icons = getResources().obtainTypedArray(R.array.array_tv_icon_hk);
+			mTVlive.tvType=Constans.TV_TYPE_HK;
 			break;
 		case Constans.TV_TYPE_JAPAN:
 			tvtitles = getResources().getStringArray(R.array.array_tv_list_japan);
 			urls = getResources().getStringArray(R.array.array_tv_url_japan);
 			icons = getResources().obtainTypedArray(R.array.array_tv_icon_japan);
+			mTVlive.tvType=Constans.TV_TYPE_JAPAN;
 			break;
 		case Constans.TV_TYPE_EUROPE:
 			tvtitles = getResources().getStringArray(R.array.array_tv_list_europe);
 			urls = getResources().getStringArray(R.array.array_tv_url_europe);
 			icons = getResources().obtainTypedArray(R.array.array_tv_icon_europe);
+			mTVlive.tvType=Constans.TV_TYPE_EUROPE;
 			break;
 
 		default:
@@ -105,6 +113,7 @@ public class TVOnlineTypeFragment extends BaseFragment implements OnItemClickLis
 			bean.iconResID = icons.getResourceId(i, 0);
 			TVList.add(bean);
 		}
+		mTVlive.chanleList = TVList;
 		icons.recycle();
 		listAdapter.notifyDataSetChanged();
 		dismissDialog();
@@ -116,6 +125,7 @@ public class TVOnlineTypeFragment extends BaseFragment implements OnItemClickLis
 			if(WebUtil.isWifi(getActivity())){
 				Intent i = new Intent(getActivity(),VideoViewActivity.class);
 				i.putExtra(Constans.PARAM_VIDEO, TVList.get(position));
+				i.putExtra(Constans.PARAM_TVLIVE, mTVlive);
 				startActivity(i);
 			}else{
 				// 走流量弹框提醒

@@ -1,9 +1,5 @@
 package com.chongbao.cbplayer.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.MediaPlayer.OnCompletionListener;
@@ -11,7 +7,10 @@ import io.vov.vitamio.MediaPlayer.OnErrorListener;
 import io.vov.vitamio.MediaPlayer.OnInfoListener;
 import io.vov.vitamio.MediaPlayer.OnPreparedListener;
 import io.vov.vitamio.widget.VideoView;
-import android.app.Activity;
+
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.media.AudioManager;
@@ -19,12 +18,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -32,12 +38,15 @@ import android.widget.TextView;
 
 import com.chongbao.cbplayer.R;
 import com.chongbao.cbplayer.bean.MediaBean;
+import com.chongbao.cbplayer.bean.TVLive;
 import com.chongbao.cbplayer.constans.Constans;
 import com.chongbao.cbplayer.utils.BrightnessUtil;
 import com.chongbao.cbplayer.utils.DialogBuilder;
 import com.chongbao.cbplayer.utils.MeasureUtil;
 import com.chongbao.cbplayer.utils.SharedPrencesUtils;
 import com.chongbao.cbplayer.view.CBProgressBar;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
 
 public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	public static final String TAG ="VideoViewActivity";
@@ -50,6 +59,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	private TextView videoInfo;
 	private TextView timeProgress;
 	private TextView timeTotal;
+	private TextView tvChange;
 	/**播放/暂停按钮**/
 	private ImageView mPlayBtn;
 	/**进度条**/
@@ -60,6 +70,8 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	private RelativeLayout mControlRLayout;
 	
 	private LinearLayout loadingTip;
+	private FrameLayout fraLayout;
+	private ListView chanleListView;
 	
 	/**音量/亮度图标**/
 	private ImageView mControlResultIcon;
@@ -75,12 +87,14 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	private MediaBean video;
 	private boolean isPlayFinished;
 	private static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+	private TVLive mTVlive;
+	private ChanleChangeAdapter mChanleChangeAdapter;
 	/**定时隐藏控制层**/
 	private Handler mDismissHander = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case MSG_DISIMISS:
-				if(!onTouch){
+				if(!onTouch&&fraLayout.getVisibility()!=View.VISIBLE){
 					dismissControlFrame();
 				}
 				break;
@@ -123,8 +137,11 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		initScreenWidthAndHeight();
 		mTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
 		initVideo();
+		initChanleList();
 	}
 
+
+	
 
 	private void initScreenWidthAndHeight() {
 		mScreenW = MeasureUtil.getScreenSize(this)[0];
@@ -144,6 +161,10 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		mControlResultRLayout = (RelativeLayout) findViewById(R.id.control_showresult_rl);
 		mControlRLayout = (RelativeLayout) findViewById(R.id.control_RLayout);
 		loadingTip = (LinearLayout) findViewById(R.id.loading_tip);
+		fraLayout = (FrameLayout) findViewById(R.id.fraLayout_chanlelist);
+		chanleListView = (ListView) findViewById(R.id.play_frame_chanle_listview);
+		tvChange = (TextView) findViewById(R.id.tv_change_chanle);
+		tvChange.setOnClickListener(this);
 		mPlayBtn.setOnClickListener(this);
 		mProgressBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
@@ -255,7 +276,42 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 			
 		}
 	}
-	
+	private void initChanleList() {
+		mTVlive = (TVLive) getIntent().getSerializableExtra(Constans.PARAM_TVLIVE);
+		if(video!=null&&video.isLive){
+			tvChange.setVisibility(View.VISIBLE);
+			chanleListView.setAdapter(mChanleChangeAdapter = new ChanleChangeAdapter());
+			chanleListView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					changeChanle(position);
+				}
+
+			});
+			
+		}else{
+			tvChange.setVisibility(View.GONE);
+			fraLayout.setVisibility(View.GONE);
+		}
+	}
+
+	/**
+	 * 切换频道
+	 * @param position
+	 */
+	private void changeChanle(int position) {
+		mVideoView.stopPlayback();
+		mProgressHandler.removeMessages(MSG_PROGRESS_UPDATE);
+		mPlayBtn.setImageResource(R.drawable.icon_btn_play);
+		video = mTVlive.chanleList.get(position);
+		videoInfo.setText(video.title);
+		mVideoView.setVideoURI(Uri.parse(video.url));
+		mVideoView.setBufferSize(1024*50);
+		showLoadingTip();
+	}
+
+
 	private void disableProgressBar() {
 		mProgressBar.setEnabled(false);
 		mProgressBar.setMax(1);
@@ -264,10 +320,10 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	
 	private void setSeekBar() {
 		if(mProgressBar!=null){
-			mProgressBar.setEnabled(true);
-			mProgressBar.setMax((int)mVideoView.getDuration());
-			mProgressBar.setProgress((int)mVideoView.getCurrentPosition());
 			if(!video.isLive){
+				mProgressBar.setEnabled(true);
+				mProgressBar.setMax((int)mVideoView.getDuration());
+				mProgressBar.setProgress((int)mVideoView.getCurrentPosition());
 				timeProgress.setText(getTime(mVideoView.getCurrentPosition()));
 				timeTotal.setText(getTime(mVideoView.getDuration()));
 			}
@@ -495,11 +551,31 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		case R.id.play_btn:
 			palyVideo();
 			break;
-
+		case R.id.tv_change_chanle:
+			showORdismisstvList();
+			break;
 		default:
 			break;
 		}
 	}
+
+	private void showORdismisstvList() {
+		if(fraLayout.getVisibility()!=View.VISIBLE){
+			fraLayout.setVisibility(View.VISIBLE);
+			ObjectAnimator animtor = ObjectAnimator.ofFloat(fraLayout, "translationX", 200,0);
+			animtor.setDuration(300);
+			animtor.start();
+		}else{
+			ObjectAnimator animtor = ObjectAnimator.ofFloat(fraLayout, "translationX", 0,200);
+			animtor.setDuration(300);
+			animtor.start();
+			fraLayout.setVisibility(View.GONE);
+			setInvisibleDelay();
+		}
+	}
+
+
+
 
 	/**
 	 * 播放视频
@@ -561,6 +637,46 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		if(loadingTip!=null){
 			loadingTip.setVisibility(View.GONE);
 		}
+	}
+	
+	private class ChanleChangeAdapter extends BaseAdapter{
+
+		@Override
+		public int getCount() {
+			return mTVlive.chanleList.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder viewHolder = null;
+			if(convertView==null){
+				viewHolder = new ViewHolder();
+				convertView = LayoutInflater.from(VideoViewActivity.this).inflate(R.layout.item_playframe_chanle_list, parent, false);
+				viewHolder.chanleTitle = (TextView) convertView.findViewById(R.id.item_playframe_list_chanle_name);
+				convertView.setTag(viewHolder);
+			}else{
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+			MediaBean bean = mTVlive.chanleList.get(position);
+			viewHolder.chanleTitle.setText(bean.title);
+			return convertView;
+		}
+		
+	}
+	private class ViewHolder{
+		TextView chanleTitle;
 	}
 	
 }

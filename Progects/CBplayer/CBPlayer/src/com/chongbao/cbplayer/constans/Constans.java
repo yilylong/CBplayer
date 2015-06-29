@@ -5,6 +5,7 @@ public class Constans {
 	public static final String SHAREDPRENCES_NAME="cbsharedprences";
 	public static final String SP_KEY_BRIGHTNESS="brightness";
 	public static final String PARAM_VIDEO="video";
+	public static final String PARAM_TVLIVE="tvlive";
 	public static final String PARAM_FRAGMENT="current_fragment";
 	public static final int TV_TYPE_CENTRAL=1001;
 	public static final int TV_TYPE_INTERNAL=1002;
