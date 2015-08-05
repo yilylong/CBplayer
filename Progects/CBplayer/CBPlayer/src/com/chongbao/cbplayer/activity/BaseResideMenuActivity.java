@@ -125,8 +125,7 @@ public abstract class BaseResideMenuActivity extends FragmentActivity implements
 		if (menuOritation == ResideMenu.DIRECTION_RIGHT) { // 右边菜单
 			ft.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
 		} else {// 左边菜单
-			ft.setCustomAnimations(R.anim.slide_right_in,
-					R.anim.slide_right_out);
+			ft.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_right_out);
 		}
 		return ft;
 	}

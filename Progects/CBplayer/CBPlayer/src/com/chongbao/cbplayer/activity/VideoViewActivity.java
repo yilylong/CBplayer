@@ -13,6 +13,7 @@ import java.util.TimeZone;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ import com.chongbao.cbplayer.utils.DialogBuilder;
 import com.chongbao.cbplayer.utils.MeasureUtil;
 import com.chongbao.cbplayer.utils.SharedPrencesUtils;
 import com.chongbao.cbplayer.view.CBProgressBar;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
 
@@ -112,7 +115,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case MSG_PROGRESS_UPDATE:
-				if(mVideoView!=null&&mVideoView.isPlaying()){
+				if(mVideoView!=null&&mVideoView.isPlaying()&&!video.isLive){
 					setSeekBar();
 					mProgressHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE,PROGRESS_UPDATE_MILLIS);
 				}else if(mVideoView!=null&&!mVideoView.isPlaying()){
@@ -136,12 +139,21 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		showControlFrame();
 		initScreenWidthAndHeight();
 		mTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
+		initData();
 		initVideo();
 		initChanleList();
 	}
 
 
 	
+
+	private void initData() {
+		mTVlive = (TVLive) getIntent().getSerializableExtra(Constans.PARAM_TVLIVE);
+		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
+	}
+
+
+
 
 	private void initScreenWidthAndHeight() {
 		mScreenW = MeasureUtil.getScreenSize(this)[0];
@@ -196,7 +208,7 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 
 
 	private void initVideo() {
-		video = (MediaBean) getIntent().getSerializableExtra(Constans.PARAM_VIDEO);
+		
 		if(video!=null){
 			showLoadingTip();
 			videoInfo.setText(video.title);
@@ -277,7 +289,6 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	private void initChanleList() {
-		mTVlive = (TVLive) getIntent().getSerializableExtra(Constans.PARAM_TVLIVE);
 		if(video!=null&&video.isLive){
 			tvChange.setVisibility(View.VISIBLE);
 			chanleListView.setAdapter(mChanleChangeAdapter = new ChanleChangeAdapter());
@@ -302,13 +313,17 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void changeChanle(int position) {
 		mVideoView.stopPlayback();
-		mProgressHandler.removeMessages(MSG_PROGRESS_UPDATE);
-		mPlayBtn.setImageResource(R.drawable.icon_btn_play);
-		video = mTVlive.chanleList.get(position);
-		videoInfo.setText(video.title);
-		mVideoView.setVideoURI(Uri.parse(video.url));
-		mVideoView.setBufferSize(1024*50);
-		showLoadingTip();
+//		releaseVideoView();
+//		mPlayBtn.setImageResource(R.drawable.icon_btn_play);
+//		mVideoView = (VideoView) findViewById(R.id.video_view);
+//		video = mTVlive.chanleList.get(position);
+//		initVideo();
+		
+//		videoInfo.setText(video.title);
+		mVideoView.invalidate();
+		mVideoView.setVideoPath("/storage/sdcard1/DCIM/Camera/VID_20150617_170438.mp4");
+//		mVideoView.setBufferSize(1024*50);
+//		showLoadingTip();
 	}
 
 
@@ -566,10 +581,27 @@ public class VideoViewActivity extends BaseActivity implements OnClickListener{
 			animtor.setDuration(300);
 			animtor.start();
 		}else{
-			ObjectAnimator animtor = ObjectAnimator.ofFloat(fraLayout, "translationX", 0,200);
+			ObjectAnimator animtor = ObjectAnimator.ofFloat(fraLayout, "translationX", 0,300);
 			animtor.setDuration(300);
+			animtor.addListener(new AnimatorListener() {
+				@Override
+				public void onAnimationStart(Animator arg0) {
+				}
+				
+				@Override
+				public void onAnimationRepeat(Animator arg0) {
+				}
+				
+				@Override
+				public void onAnimationEnd(Animator arg0) {
+					fraLayout.setVisibility(View.GONE);
+				}
+				
+				@Override
+				public void onAnimationCancel(Animator arg0) {
+				}
+			});
 			animtor.start();
-			fraLayout.setVisibility(View.GONE);
 			setInvisibleDelay();
 		}
 	}

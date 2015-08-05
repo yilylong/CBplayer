@@ -1,11 +1,14 @@
-apply plugin: 'android-library'
+apply plugin: 'android'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
+    compile project(':ResideMenu')
+    compile project(':VitamioLibrary')
+    compile project(':ViewpagerIndicatorlibrary')
 }
 
 android {
-    compileSdkVersion 17
+    compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
     sourceSets {

@@ -1,0 +1,4 @@
+include ':ViewpagerIndicatorlibrary'
+include ':CBPlayer'
+include ':VitamioLibrary'
+include ':ResideMenu'
